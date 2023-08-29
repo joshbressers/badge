@@ -18,21 +18,10 @@ uint8_t dataPin2 = 3;
 byte currentRow = 0;
 uint8_t messageCount = 60;
 uint8_t messageDelay = 5000;
-uint8_t frameBuffer[] = {0,0,0,0,0,0,0,0};
+byte frameBuffer[] = {0,0,0,0,0,0,0,0};
 
-uint8_t message[] = {
-        0x36, 0x49, 0x49, 0x49, 0x36, 0x00,  // 0x38 8
-        0x46, 0x49, 0x49, 0x29, 0x1E, 0x00,  // 0x39 9
-        0x00, 0x00, 0x14, 0x00, 0x00, 0x00,  // 0x3A :
-        0x00, 0x40, 0x34, 0x00, 0x00, 0x00,  // 0x3B ;
-        0x00, 0x08, 0x14, 0x22, 0x41, 0x00,  // 0x3C <
-        0x14, 0x14, 0x14, 0x14, 0x14, 0x00,  // 0x3D =
-        0x00, 0x41, 0x22, 0x14, 0x08, 0x00,  // 0x3E >
-        0x02, 0x01, 0x59, 0x09, 0x06, 0x00,  // 0x3F ?
-        0x3E, 0x41, 0x5D, 0x59, 0x4E, 0x00,  // 0x40 @
-        0x7C, 0x12, 0x11, 0x12, 0x7C, 0x00,  // 0x41 A
-
-};
+unsigned char message[] = "Test Message \0";
+uint8_t messageLen = strlen(message);
 
 unsigned long previousMillis = 0;
 
@@ -74,7 +63,6 @@ pinMode(dataPin1, OUTPUT);
 pinMode(dataPin2, OUTPUT);
 }
 
-
 void loop() {
 
   // We use the number of milliseconds to know when to take various actions
@@ -87,10 +75,20 @@ void loop() {
 
     // Copy message data into framebuffer
     for (int i = 0; i < 8; i++) {
-      frameBuffer[i] = message[(messageCount + i) % 60]; 
+      // We will probably be reading two letters for this
+      uint8_t letterPos;
+      if (((messageCount + i) / 6) >= messageLen) {
+        letterPos = message[(i / 6)] - 0x20;
+      } else {
+        letterPos = message[((messageCount + i) / 6)] - 0x20;
+      }
+      //if (letterPos >= messageLen) letterPos = 0;
+      uint8_t pos = (messageCount + i) % 6;
+      byte letterChar = pgm_read_byte(font + (letterPos * 6) + pos);
+      frameBuffer[i] = letterChar;
     }
     messageCount++;
-    if (messageCount >= 60) messageCount = 0;
+    if (messageCount >= messageLen * 6) messageCount = 0;
   }
   
   shiftRegisters();
