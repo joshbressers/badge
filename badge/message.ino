@@ -1,4 +1,25 @@
 // Function that displays a message on the screen
+
+void showDefaultMessage()
+{
+  setMessage(defaultMessage);
+  showMessage();
+}
+
+void setMessage(unsigned char *newMessage) {
+  message = newMessage;
+
+  messageLen = 0;
+  while (true) {
+    if (pgm_read_byte(message + messageLen) == 0) {
+      break;
+    } else {
+      messageLen++;
+    }
+  }
+}
+
+
 void showMessage()
 {
     // Scroll the display at a reasonable speed
@@ -14,9 +35,10 @@ void showMessage()
       if (((messageCount + i) / 6) >= messageLen) {
         // This the case where we hit the end of the message
         // and have to wrap back to 0
-        letterPos = message[0] - 0x20;
+        letterPos = pgm_read_word(message) - 0x20;
       } else {
-        letterPos = message[((messageCount + i) / 6)] - 0x20;
+        uint8_t pgmIndex = (messageCount + i) / 6;
+        letterPos = pgm_read_word(message + pgmIndex) - 0x20;
       }
       //if (letterPos >= messageLen) letterPos = 0;
       uint8_t pos = (messageCount + i) % 6;

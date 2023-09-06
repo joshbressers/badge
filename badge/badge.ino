@@ -19,14 +19,15 @@ uint8_t inputBits = 0x00;
 
 // Frame buffer variables
 byte currentRow = 0;
-uint8_t messageCount = 0;
+unsigned long messageCount = 0;
 uint8_t messageDelay = 50;
 byte frameBuffer[] = {0,0,0,0,0,0,0,0};
 
 uint8_t currentState = 0;
 
-unsigned char message[] = "Some message 01234\0";
-unsigned int messageLen = strlen(message);
+static const unsigned char defaultMessage[] PROGMEM = "Longer Message 0123";
+unsigned char *message;
+unsigned int messageLen = 0;
 
 unsigned long currentLoop = 0;
 unsigned long lastLoop = 0;
@@ -39,7 +40,7 @@ pinMode(clockPin, OUTPUT);
 pinMode(dataPin1, OUTPUT);
 pinMode(dataPin2, OUTPUT);
 pinMode(buttonPin, INPUT);
-  
+setMessage(defaultMessage);
 }
 
 void loop() {
@@ -67,11 +68,8 @@ void loop() {
     lastButton++;
   }
 
-  if (lastButton > 2000) {
+  if (lastButton > 500) {
     currentState = 0;
     lastButton = 0;
   }
-
-//  sprintf(message, "|%x|", inputBits);
-//  messageLen = 4;
 }

@@ -18,6 +18,7 @@ void buttonTest() {
  *    0x80 - Up
  */
 
+    showDefaultMessage();
     // Clear the frame buffer
     clearFrameBuffer();
     
