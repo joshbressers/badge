@@ -18,15 +18,14 @@ void buttonTest() {
  *    0x80 - Up
  */
 
-    showDefaultMessage();
     // Clear the frame buffer
     clearFrameBuffer();
     
-    if (inputBits & 0x04) frameBuffer[6] = 0x08; // A
-    if (inputBits & 0x08) frameBuffer[4] = 0x08; // B
-    if (inputBits & 0x10) frameBuffer[2] = 0x08; // Right
-    if (inputBits & 0x20) frameBuffer[1] = frameBuffer[1] | 0x10; // Down
-    if (inputBits & 0x80) frameBuffer[1] = frameBuffer[1] | 0x04; // Up
-    if (inputBits & 0x40) frameBuffer[0] = 0x08; // Left
+    if (inputBits & BTN_A) frameBuffer[6] = 0x08; // A
+    if (inputBits & BTN_B) frameBuffer[4] = 0x08; // B
+    if (inputBits & BTN_RIGHT) frameBuffer[2] = 0x08; // Right
+    if (inputBits & BTN_DOWN) frameBuffer[1] = frameBuffer[1] | 0x10; // Down
+    if (inputBits & BTN_UP) frameBuffer[1] = frameBuffer[1] | 0x04; // Up
+    if (inputBits & BTN_LEFT) frameBuffer[0] = 0x08; // Left
 
 }

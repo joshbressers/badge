@@ -4,6 +4,7 @@ void shiftRegisters()
       digitalWrite(latchPin, HIGH);
       uint8_t i, j;
       uint8_t currentRow = 1; // A bit vector for the LED row
+      OLD_BUTTON = inputBits;
 
       // Loop for each row
       for (j = 0; j < 8; j++) {

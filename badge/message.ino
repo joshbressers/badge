@@ -1,13 +1,13 @@
 // Function that displays a message on the screen
 
-void showDefaultMessage()
+void setDefaultMessage()
 {
   setMessage(defaultMessage);
-  showMessage();
 }
 
 void setMessage(unsigned char *newMessage) {
   message = newMessage;
+  messageCount = 0;
 
   messageLen = 0;
   while (true) {

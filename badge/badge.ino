@@ -23,15 +23,31 @@ unsigned long messageCount = 0;
 uint8_t messageDelay = 50;
 byte frameBuffer[] = {0,0,0,0,0,0,0,0};
 
-uint8_t currentState = 0;
+enum State {
+  HOME,
+  MENU,
+  MENU2, // Private state for menu
+  BUTTON
+};
+State currentState = HOME;
 
-static const unsigned char defaultMessage[] PROGMEM = "Longer Message 0123";
+static const unsigned char defaultMessage[] PROGMEM = "Teh Badge ";
 unsigned char *message;
 unsigned int messageLen = 0;
 
 unsigned long currentLoop = 0;
 unsigned long lastLoop = 0;
 unsigned long lastButton = 0;
+
+// Button Constants
+#define BTN_A 0x04
+#define BTN_B 0x08
+#define BTN_LEFT 0x40
+#define BTN_RIGHT 0x10
+#define BTN_UP 0x80
+#define BTN_DOWN 0x20
+
+uint8_t OLD_BUTTON = 0;
 
 void setup() {
 //set pins to output so you can control the shift register
@@ -49,27 +65,34 @@ void loop() {
   currentLoop++;
   shiftRegisters();
 
-  if (currentState == 0) {
-    showMessage();
-
-    // Add a special check for input here to set the state
-    if (inputBits) {
-      currentState = 1;
-      lastButton = 0;
-    }
-
-  } else if (currentState == 1) {
-    buttonTest();
+  switch(currentState) {
+    case HOME:
+      showMessage();
+      // If we see a new keypress, load the menu
+      if (inputBits && (inputBits ^ OLD_BUTTON)) currentState = MENU;
+      break;
+    case MENU:
+    case MENU2:
+      showMenu();
+      break;
+    case BUTTON:
+      buttonTest();
+      break;
   }
 
+  // If we detect any input at all, reset the lastButton counter
   if (inputBits) {
     lastButton = 0;
   } else {
     lastButton++;
   }
 
-  if (lastButton > 500) {
-    currentState = 0;
-    lastButton = 0;
+  // If nothing has happened in a while, go back home
+  if (lastButton > 1000) {
+    if (currentState != HOME) {
+      currentState = HOME;
+      setDefaultMessage();
+      lastButton = 0;
+    }
   }
 }
