@@ -28,3 +28,11 @@ void showMessage()
   }
 
 }
+
+void clearFrameBuffer() {
+  for (int i = 0; i < 8; i++) {
+    frameBuffer[i] = 0;
+  }
+  // Reset the message to the beginning
+  messageCount = 0;
+}
