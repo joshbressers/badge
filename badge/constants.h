@@ -6,13 +6,13 @@
 // Hardware related constants
 
 // Shift register pins
-uint8_t latchPin = 1;
-uint8_t clockPin = 2;
+#define latchPin 1
+#define clockPin 2
 
 ////Pin connected to DS of 74HC595
-uint8_t dataPin1 = 0; // SR 1
-uint8_t dataPin2 = 3; // SR 2
-uint8_t buttonPin = 4; // Button Input
+#define dataPin1 0 // SR 1
+#define dataPin2 3 // SR 2
+#define buttonPin 4 // Button Input
 
 // Random variables shared by things
 uint8_t i, j;
@@ -27,18 +27,25 @@ enum State {
   MENU,
   MENU2, // Private state for menu
   DOT,
+  SCREEN,
   BUTTON
 };
 State currentState = HOME;
 
+// How many ticks should we wait until we return to home screen
+#define HOME_TIMEOUT 2000
+
 // Message display constants
-static const unsigned char defaultMessage[] PROGMEM = "Teh Badge ";
-unsigned char *message;
+const char defaultMessage[] PROGMEM = "Teh Badge ";
+const char* const homeStrings[] PROGMEM = {
+  defaultMessage,
+};
+const char* message;
 unsigned int messageLen = 0;
 
 // Constants used when writing the message to the framebuffer
 unsigned long messageCount = 0;
-uint8_t messageDelay = 50;
+#define messageDelay 50
 unsigned long lastButton = 0;
 
 // Tick constants
@@ -56,7 +63,7 @@ unsigned long currentTick = 0;
 #define BTN_DOWN 0x20
 
 uint8_t CUR_BUTTON = 0x00;
-uint8_t OLD_BUTTON = 0;
+uint8_t OLD_BUTTON = 0x00;
 
 // Button functionality
 
@@ -71,5 +78,7 @@ void showMessage();
 void clearFrameBuffer();
 void moveDot();
 void showMenu();
+void screenTest();
+void buttonTest();
 
 #endif

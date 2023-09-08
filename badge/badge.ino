@@ -10,7 +10,7 @@ pinMode(clockPin, OUTPUT);
 pinMode(dataPin1, OUTPUT);
 pinMode(dataPin2, OUTPUT);
 pinMode(buttonPin, INPUT);
-setMessage(defaultMessage);
+setMessage(&homeStrings[0]);
 }
 
 void loop() {
@@ -43,6 +43,9 @@ void loop() {
     case DOT:
       moveDot();
       break;
+    case SCREEN:
+      screenTest();
+      break;
   }
 
   // If we detect any input at all, reset the lastButton counter
@@ -55,10 +58,10 @@ void loop() {
   // If nothing has happened in a while, go back home
   // This is a timeout function that when a badge isn't being used, it starts to show
   // the default message
-  if (lastButton > 1000) {
+  if (lastButton > HOME_TIMEOUT) {
     if (currentState != HOME) {
       currentState = HOME;
-      setMessage(defaultMessage);
+      setMessage(&homeStrings[0]);
       lastButton = 0;
     }
   }

@@ -3,27 +3,10 @@
 
 void buttonTest() {
 
-/*
- * The button layout is
- * 
- *    U
- *  L   R    B A
- *    D
- *    
- *    Bit
- *    0x01 - unused
- *    0x02 - unused
- *    0x04 - A
- *    0x08 - B
- *    0x10 - Right
- *    0x20 - Down
- *    0x40 - Left
- *    0x80 - Up
- */
-
     // Clear the frame buffer
     clearFrameBuffer();
-    
+
+    // Print dots on the display to represent the buttons
     if (CUR_BUTTON & BTN_A) frameBuffer[6] = 0x08; // A
     if (CUR_BUTTON & BTN_B) frameBuffer[4] = 0x08; // B
     if (CUR_BUTTON & BTN_RIGHT) frameBuffer[2] = 0x08; // Right
@@ -31,4 +14,17 @@ void buttonTest() {
     if (CUR_BUTTON & BTN_UP) frameBuffer[1] = frameBuffer[1] | 0x04; // Up
     if (CUR_BUTTON & BTN_LEFT) frameBuffer[0] = 0x08; // Left
 
+}
+
+void screenTest() {
+  static uint8_t pattern = 0xAA;
+  if (TICK(100)) {
+    if (pattern & 0x01) pattern = 0xAA;
+    else pattern = 0x55;
+  }
+  if (TICK(10)) {
+    for (i = 0; i < 8; i++) {
+      frameBuffer[i] = pattern;
+    }
+  }
 }

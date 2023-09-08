@@ -10,10 +10,19 @@
 #include "constants.h"
 
 // Menu static text
-static const unsigned char menu0[] PROGMEM = "Menu ";
-static const unsigned char menu1[] PROGMEM = "Button Test ";
-static const unsigned char menu2[] PROGMEM = "Move Dot ";
-static const unsigned char menu99[] PROGMEM = "Back ";
+const char menu0[] PROGMEM = "Menu ";
+const char menu1[] PROGMEM = "Button Test ";
+const char menu2[] PROGMEM = "Move Dot ";
+const char menu3[] PROGMEM = "Screen Test ";
+const char menu99[] PROGMEM = "Back ";
+
+const char* const menuStrings[] PROGMEM = {
+  menu0,
+  menu1,
+  menu2,
+  menu3,
+  menu99
+};
 
 // The compiler will probably make these incrementing integers
 // But let's set them just in case
@@ -22,8 +31,9 @@ enum menuStates {
   M_MENU = 0,
   M_BUTTON = 1,
   M_DOT = 2,
-  M_BACK = 3
-  
+  M_SCREEN = 3,
+  M_BACK = 4
+ 
 } menuState;
 bool menuChanged = false;
 
@@ -33,7 +43,7 @@ void showMenu() {
   if (currentState == MENU) {
     currentState = MENU2;
     menuState = M_MENU;
-    setMessage(menu0);
+    setMessage(&menuStrings[menuState]);
   }
 
   // Button handling
@@ -53,30 +63,18 @@ void showMenu() {
   } else if (NEW_BUTTON(BTN_A)) {
     if (menuState == M_BUTTON) currentState = BUTTON;
     else if (menuState == M_DOT) currentState = DOT;
+    else if (menuState == M_SCREEN) currentState = SCREEN;
     else if (menuState == M_BACK) {
       currentState = HOME;
       OLD_BUTTON = CUR_BUTTON;
-      setMessage(defaultMessage);
+      setMessage(&homeStrings[0]);
     }
     menuState = M_MENU;
     menuChanged = false;
   }
   if (menuChanged) {
     menuChanged = false;
-    switch(menuState) {
-      case M_MENU:
-        setMessage(menu0);
-        break;
-      case M_BUTTON:
-        setMessage(menu1);
-        break;
-      case M_DOT:
-        setMessage(menu2);
-        break;
-      case M_BACK:
-        setMessage(menu99);
-        break;
-    }
+    setMessage(&menuStrings[menuState]);
   }
   showMessage();
 }
