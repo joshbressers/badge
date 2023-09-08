@@ -1,3 +1,6 @@
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
+
 // Constants
 
 // Hardware related constants
@@ -23,6 +26,7 @@ enum State {
   HOME,
   MENU,
   MENU2, // Private state for menu
+  DOT,
   BUTTON
 };
 State currentState = HOME;
@@ -35,9 +39,13 @@ unsigned int messageLen = 0;
 // Constants used when writing the message to the framebuffer
 unsigned long messageCount = 0;
 uint8_t messageDelay = 50;
-unsigned long currentLoop = 0;
-unsigned long lastLoop = 0;
 unsigned long lastButton = 0;
+
+// Tick constants
+// The millis() on this chip isn't very reliable, so let's just count up a tick
+// on every loop
+unsigned long currentTick = 0;
+#define TICK(the_tick) (!(currentTick % the_tick))
 
 // Button Constants
 #define BTN_A 0x04
@@ -55,3 +63,13 @@ uint8_t OLD_BUTTON = 0;
 // This will return true if a button is pressed for the first time
 // A held down button will return false
 #define NEW_BUTTON(the_btn) ((CUR_BUTTON & the_btn) && !(OLD_BUTTON & the_btn))
+
+// Define our functions here
+void setMessage(unsigned char *newMessage);
+void shiftRegisters();
+void showMessage();
+void clearFrameBuffer();
+void moveDot();
+void showMenu();
+
+#endif

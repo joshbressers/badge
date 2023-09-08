@@ -1,3 +1,6 @@
+#ifndef FONT_H
+#define FONT_H
+
 // Font for displaying messages
 // This listing only has printable charactrs on the keyboard
 
@@ -99,3 +102,5 @@ static const unsigned char font[] PROGMEM = {
   0x00, 0x41, 0x36, 0x08, 0x00, 0x00,  // 0x7D }
   0x02, 0x01, 0x02, 0x04, 0x02, 0x00   // 0x7E ~
   };
+
+  #endif

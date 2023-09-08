@@ -7,12 +7,24 @@
  * message screen
  */
 
+#include "constants.h"
+
 // Menu static text
 static const unsigned char menu0[] PROGMEM = "Menu ";
 static const unsigned char menu1[] PROGMEM = "Button Test ";
-static const unsigned char menu2[] PROGMEM = "Back ";
+static const unsigned char menu2[] PROGMEM = "Move Dot ";
+static const unsigned char menu99[] PROGMEM = "Back ";
 
-uint8_t menuState = 0;
+// The compiler will probably make these incrementing integers
+// But let's set them just in case
+// M_MENU should always be first and M_BACK always last
+enum menuStates {
+  M_MENU = 0,
+  M_BUTTON = 1,
+  M_DOT = 2,
+  M_BACK = 3
+  
+} menuState;
 bool menuChanged = false;
 
 void showMenu() {
@@ -20,6 +32,7 @@ void showMenu() {
   // The first time we show the menu, change the text
   if (currentState == MENU) {
     currentState = MENU2;
+    menuState = M_MENU;
     setMessage(menu0);
   }
 
@@ -28,38 +41,40 @@ void showMenu() {
 //  if ((CUR_BUTTON & BTN_DOWN) && !(OLD_BUTTON & BTN_DOWN)) {
   if (NEW_BUTTON(BTN_DOWN)) {
 
-    if (menuState < 2) {
-      menuState++;
+    if (menuState < M_BACK) {
+      menuState = menuState + 1;
       menuChanged = true;
     }
-//  } else if ((CUR_BUTTON & BTN_UP) && !(OLD_BUTTON & BTN_UP)) {
-    } else if (NEW_BUTTON(BTN_UP)) {
-    if (menuState > 0) {
-      menuState--;
+  } else if (NEW_BUTTON(BTN_UP)) {
+    if (menuState > M_MENU) {
+      menuState = menuState - 1;
       menuChanged = true;
     }
-//  } else if ((CUR_BUTTON & BTN_A) && !(OLD_BUTTON & BTN_A)) {
   } else if (NEW_BUTTON(BTN_A)) {
-    if (menuState == 1) currentState = BUTTON;
-    if (menuState == 2) {
+    if (menuState == M_BUTTON) currentState = BUTTON;
+    else if (menuState == M_DOT) currentState = DOT;
+    else if (menuState == M_BACK) {
       currentState = HOME;
       OLD_BUTTON = CUR_BUTTON;
       setMessage(defaultMessage);
     }
-    menuState = 0;
+    menuState = M_MENU;
     menuChanged = false;
   }
   if (menuChanged) {
     menuChanged = false;
     switch(menuState) {
-      case 0:
+      case M_MENU:
         setMessage(menu0);
         break;
-      case 1:
+      case M_BUTTON:
         setMessage(menu1);
         break;
-      case 2:
+      case M_DOT:
         setMessage(menu2);
+        break;
+      case M_BACK:
+        setMessage(menu99);
         break;
     }
   }

@@ -1,5 +1,7 @@
 // Function that displays a message on the screen
 
+#include "constants.h"
+
 // Set the message to a string in PROGMEM
 // A string cannot be passed in here
 void setMessage(unsigned char *newMessage) {
@@ -20,10 +22,8 @@ void setMessage(unsigned char *newMessage) {
 
 void showMessage()
 {
-    // Scroll the display at a reasonable speed
-  if (currentLoop - lastLoop >= messageDelay) {
-    // save the last time you changed the message
-    lastLoop = currentLoop;
+  // Scroll the display at a reasonable speed
+  if (TICK(messageDelay)) {
 
     /*
      * Copy message data into framebuffer

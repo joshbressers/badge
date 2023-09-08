@@ -17,7 +17,7 @@ void loop() {
 
   // We count the number of loops instead of using millis()
   // On the ATTINY85 chip the millis() retuns odd things
-  currentLoop++;
+  currentTick++;
 
   // Load up the shift registers
   shiftRegisters();
@@ -39,6 +39,9 @@ void loop() {
       break;
     case BUTTON:
       buttonTest();
+      break;
+    case DOT:
+      moveDot();
       break;
   }
 

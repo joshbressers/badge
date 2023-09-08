@@ -1,5 +1,7 @@
 // Function to process the shift registers
 
+#include "constants.h"
+
 /*
  * The way we use shift registes is very odd, but given the extreme constraints
  * for this project, it works.
@@ -15,8 +17,7 @@
  * As soon as we trip the latch, we start to write and read bits
  * 
  */
-void shiftRegisters()
-{
+void shiftRegisters() {
       digitalWrite(latchPin, HIGH);
       uint8_t currentRow = 1; // A bit vector for the LED row
       OLD_BUTTON = CUR_BUTTON;
