@@ -54,40 +54,10 @@ void shiftRegisters() {
           // (remove the 7 - to scroll right, but that would be weird)
           digitalWrite(dataPin2, !(frameBuffer[j] & (1 << (7 - i))));
 
-          // We handle each button press like this. It's sort of silly
-          // but because we're already doing unspeakable things with these
-          // shift registers, it's the only way to make it all work
-          // (I tried to bitshift it all in, it just wasn't working)
-          if (digitalRead(buttonPin)) {
-            switch(i) {
-              case 0:
-                CUR_BUTTON = CUR_BUTTON | 0x01;
-                break;
-              case 1:
-                CUR_BUTTON = CUR_BUTTON | 0x02;
-                break;
-              case 2:
-                CUR_BUTTON = CUR_BUTTON | 0x04;
-                break;
-              case 3:
-                CUR_BUTTON = CUR_BUTTON | 0x08;
-                break;
-              case 4:
-                // Unused at the moment
-                CUR_BUTTON = CUR_BUTTON | 0x10;
-                break;
-              case 5:
-                CUR_BUTTON = CUR_BUTTON | 0x20;
-                break;
-              case 6:
-                CUR_BUTTON = CUR_BUTTON | 0x40;
-                break;
-              case 7:
-                // This one will never work, the bit is lost in the void
-                CUR_BUTTON = CUR_BUTTON | 0x80;
-                break;
-             }
-          }
+          // Shift in the button presses
+          CUR_BUTTON = CUR_BUTTON << 1;
+          if (digitalRead(buttonPin))
+            CUR_BUTTON = CUR_BUTTON | 0x01;
 
           // Pulse the clock
           digitalWrite(clockPin, HIGH);

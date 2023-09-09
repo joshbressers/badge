@@ -26,13 +26,14 @@ badgeStruct thePrograms[] = {
     NULL
   },
   {
-    menu1,
-    (*buttonTest)
-  },
-  {
     menu2,
     (*moveDot)
   },
+  {
+    menu1,
+    (*buttonTest)
+  },
+
   {
     menu3,
     (*screenTest)

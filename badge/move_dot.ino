@@ -1,12 +1,12 @@
 
 #include "constants.h"
 
-uint8_t x = 4 * 32;
-uint8_t y = 4 * 32;
-uint8_t x_vel = 0;
-uint8_t y_vel = 0;
-
 void moveDot() {
+  uint8_t x = 4 * 32;
+  uint8_t y = 4 * 32;
+  uint8_t x_vel = 0;
+  uint8_t y_vel = 0;
+
   while(true) {
     LOOP(0);
     clearFrameBuffer();

@@ -67,12 +67,12 @@ unsigned long currentTick = 0;
 }
 
 // Button Constants
-#define BTN_A 0x04
-#define BTN_B 0x08
-#define BTN_LEFT 0x40
-#define BTN_RIGHT 0x10
-#define BTN_UP 0x80
-#define BTN_DOWN 0x20
+#define BTN_A 0x20
+#define BTN_B 0x10
+#define BTN_LEFT 0x02
+#define BTN_RIGHT 0x08
+#define BTN_UP 0x01
+#define BTN_DOWN 0x04
 
 uint8_t CUR_BUTTON = 0x00;
 uint8_t OLD_BUTTON = 0x00;
