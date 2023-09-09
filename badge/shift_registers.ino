@@ -2,6 +2,22 @@
 
 #include "constants.h"
 
+void runTick() {
+  
+  // We count the number of loops instead of using millis()
+  // On the ATTINY85 chip the millis() retuns odd things
+  currentTick++;
+
+  if (CUR_BUTTON) {
+    lastButton = 0;
+  } else {
+    lastButton++;
+  }
+
+  shiftRegisters();
+}
+
+
 /*
  * The way we use shift registes is very odd, but given the extreme constraints
  * for this project, it works.

@@ -2,6 +2,8 @@
 #include "constants.h"
 
 void buttonTest() {
+  while(true) {
+    LOOP(HOME_TIMEOUT);
 
     // Clear the frame buffer
     clearFrameBuffer();
@@ -13,18 +15,26 @@ void buttonTest() {
     if (CUR_BUTTON & BTN_DOWN) frameBuffer[1] = frameBuffer[1] | 0x10; // Down
     if (CUR_BUTTON & BTN_UP) frameBuffer[1] = frameBuffer[1] | 0x04; // Up
     if (CUR_BUTTON & BTN_LEFT) frameBuffer[0] = 0x08; // Left
-
+  }
 }
 
 void screenTest() {
   static uint8_t pattern = 0xAA;
-  if (TICK(100)) {
-    if (pattern & 0x01) pattern = 0xAA;
-    else pattern = 0x55;
-  }
-  if (TICK(10)) {
-    for (i = 0; i < 8; i++) {
-      frameBuffer[i] = pattern;
+
+  while (true) {
+    LOOP(0);
+
+    if (TICK(100)) {
+      if (pattern & 0x01) pattern = 0xAA;
+      else pattern = 0x55;
+    }
+    if (TICK(10)) {
+      for (i = 0; i < 8; i++) {
+        frameBuffer[i] = pattern;
+      }
+    }
+    if (NEW_BUTTON(BTN_A)) {
+      return;
     }
   }
 }

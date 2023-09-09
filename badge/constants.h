@@ -1,6 +1,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include "font.h"
+
 // Constants
 
 // Hardware related constants
@@ -36,23 +38,33 @@ State currentState = HOME;
 #define HOME_TIMEOUT 2000
 
 // Message display constants
-const char defaultMessage[] PROGMEM = "Teh Badge ";
-const char* const homeStrings[] PROGMEM = {
-  defaultMessage,
-};
+const char defaultMessage[] PROGMEM = "Badge Test ";
 const char* message;
 unsigned int messageLen = 0;
 
 // Constants used when writing the message to the framebuffer
 unsigned long messageCount = 0;
-#define messageDelay 50
+#define messageDelay 30
 unsigned long lastButton = 0;
 
 // Tick constants
 // The millis() on this chip isn't very reliable, so let's just count up a tick
 // on every loop
 unsigned long currentTick = 0;
+
+// TICK can be used for delay loops. Pass it in a value so you only execute
+// after a certain amount of time has passed.
 #define TICK(the_tick) (!(currentTick % the_tick))
+
+// This has to be run by every function. A timeout of zero can be passed in
+// to not every timeout. If no timeout is used it's up to the function
+// to return
+#define LOOP(loop_define_timeout) {\
+  runTick();\
+  if (loop_define_timeout && (lastButton > loop_define_timeout)) {\
+    return;\
+  }\
+}
 
 // Button Constants
 #define BTN_A 0x04
@@ -80,5 +92,6 @@ void moveDot();
 void showMenu();
 void screenTest();
 void buttonTest();
+void runTick();
 
 #endif

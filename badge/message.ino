@@ -4,8 +4,8 @@
 
 // Set the message to a string in PROGMEM
 // A string cannot be passed in here
-void setMessage(const char* const *newMessage) {
-  message = reinterpret_cast<const char*>(pgm_read_ptr(newMessage));
+void setMessage(unsigned char *newMessage) {
+  message = newMessage;
   messageCount = 0;
 
   // We have to write our own strlen as PROGMEM strings are different

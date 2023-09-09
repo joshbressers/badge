@@ -14,67 +14,65 @@ const char menu0[] PROGMEM = "Menu ";
 const char menu1[] PROGMEM = "Button Test ";
 const char menu2[] PROGMEM = "Move Dot ";
 const char menu3[] PROGMEM = "Screen Test ";
-const char menu99[] PROGMEM = "Back ";
 
-const char* const menuStrings[] PROGMEM = {
-  menu0,
-  menu1,
-  menu2,
-  menu3,
-  menu99
+typedef struct badgeStruct {
+  const char *programName;
+  void (*badgeFunction)(void);
 };
 
-// The compiler will probably make these incrementing integers
-// But let's set them just in case
-// M_MENU should always be first and M_BACK always last
-enum menuStates {
-  M_MENU = 0,
-  M_BUTTON = 1,
-  M_DOT = 2,
-  M_SCREEN = 3,
-  M_BACK = 4
- 
-} menuState;
-bool menuChanged = false;
+badgeStruct thePrograms[] = {
+  {
+    menu0,
+    NULL
+  },
+  {
+    menu1,
+    (*buttonTest)
+  },
+  {
+    menu2,
+    (*moveDot)
+  },
+  {
+    menu3,
+    (*screenTest)
+  }
+  
+};
 
 void showMenu() {
+  uint8_t menuIndex = 0;
+  uint8_t menuMax = sizeof(thePrograms) / sizeof(thePrograms[0]);
+  bool menuChanged = false;
+  
+  setMessage(thePrograms[0].programName);
+  while (true) {
+    LOOP(HOME_TIMEOUT);
 
-  // The first time we show the menu, change the text
-  if (currentState == MENU) {
-    currentState = MENU2;
-    menuState = M_MENU;
-    setMessage(&menuStrings[menuState]);
-  }
+    
+    if (NEW_BUTTON(BTN_DOWN)) {
 
-  // Button handling
-  // Change the message if up adn down are pressed
-//  if ((CUR_BUTTON & BTN_DOWN) && !(OLD_BUTTON & BTN_DOWN)) {
-  if (NEW_BUTTON(BTN_DOWN)) {
+      if (menuIndex < (menuMax - 1)) {
+        menuIndex++;
+        menuChanged = true;
+      }
+    } else if (NEW_BUTTON(BTN_UP)) {
+      if (menuIndex > 0) {
+        menuIndex--;
+        menuChanged = true;
+      }
+    } else if (NEW_BUTTON(BTN_A)) {
+      if (thePrograms[menuIndex].badgeFunction != NULL) {
+        (*thePrograms[menuIndex].badgeFunction)();
+        menuIndex = 0;
+        menuChanged = true;
+      }
+    }
+    if (menuChanged) {
+      menuChanged = false;
+      setMessage(thePrograms[menuIndex].programName);
+    }
 
-    if (menuState < M_BACK) {
-      menuState = menuState + 1;
-      menuChanged = true;
-    }
-  } else if (NEW_BUTTON(BTN_UP)) {
-    if (menuState > M_MENU) {
-      menuState = menuState - 1;
-      menuChanged = true;
-    }
-  } else if (NEW_BUTTON(BTN_A)) {
-    if (menuState == M_BUTTON) currentState = BUTTON;
-    else if (menuState == M_DOT) currentState = DOT;
-    else if (menuState == M_SCREEN) currentState = SCREEN;
-    else if (menuState == M_BACK) {
-      currentState = HOME;
-      OLD_BUTTON = CUR_BUTTON;
-      setMessage(&homeStrings[0]);
-    }
-    menuState = M_MENU;
-    menuChanged = false;
+    showMessage();
   }
-  if (menuChanged) {
-    menuChanged = false;
-    setMessage(&menuStrings[menuState]);
-  }
-  showMessage();
 }
