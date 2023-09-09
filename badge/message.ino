@@ -2,16 +2,47 @@
 
 #include "constants.h"
 
+bool progmemMessage = true;
+
+// Print a message then return
+void printMessage(unsigned char *newMessage, bool memMessage) {
+  if (memMessage) {
+    setMemMessage(newMessage);
+  } else {
+    setMessage(newMessage);
+  }
+  while (true) {
+    LOOP(0);
+    showMessage();
+    if (donePrinting) return;
+  }
+}
+
+// These are PROGMEM strings
+void setMessage(unsigned char *newMessage) {
+  progmemMessage = true;
+  realSetMessage(newMessage);
+}
+
+void setMemMessage(unsigned char *newMessage) {
+  progmemMessage = false;
+  realSetMessage(newMessage);
+}
+
 // Set the message to a string in PROGMEM
 // A string cannot be passed in here
-void setMessage(unsigned char *newMessage) {
+void realSetMessage(unsigned char *newMessage) {
   message = newMessage;
   messageCount = 0;
+  donePrinting = false;
+  byte messageByte;
 
   // We have to write our own strlen as PROGMEM strings are different
   messageLen = 0;
   while (true) {
-    if (pgm_read_byte(message + messageLen) == 0) {
+    if (progmemMessage) messageByte = pgm_read_byte(message + messageLen);
+    else messageByte = message[messageLen];
+    if (messageByte == 0) {
       break;
     } else {
       messageLen++;
@@ -38,7 +69,7 @@ void showMessage()
      * 
      */
     
-    for (i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; i++) {
       /*
        * There will always be 2 letters on the screen at a time. The letters
        * are 6 pixels wide, the screen is 8
@@ -55,11 +86,20 @@ void showMessage()
       if (((messageCount + i) / 6) >= messageLen) {
         // This the case where we hit the end of the message
         // and have to wrap back to 0
-        letterPos = pgm_read_word(message) - 0x20;
+        if (progmemMessage) {
+          letterPos = pgm_read_word(message) - 0x20;
+        } else{ 
+          letterPos = message[0] - 0x20;
+        }
+        donePrinting = true;
         // We subtrace 0x20 from the letter so our font index lines up
       } else {
         uint8_t pgmIndex = (messageCount + i) / 6;
-        letterPos = pgm_read_word(message + pgmIndex) - 0x20;
+        if (progmemMessage) {
+          letterPos = pgm_read_word(message + pgmIndex) - 0x20;
+        } else {
+          letterPos = message[pgmIndex] - 0x20;
+        }
       }
 
       // pos contians the actual row we are going to display
@@ -71,7 +111,9 @@ void showMessage()
     // messageCount is the row we're displaying, when we get to the end of the
     // string, we flip back to zero
     messageCount++;
-    if (messageCount >= messageLen * 6) messageCount = 0;
+    if (messageCount >= messageLen * 6) {
+      messageCount = 0;
+    }
   }
 
 }
@@ -79,7 +121,7 @@ void showMessage()
 // Write all zeros to the framebuffer
 // Basically, clear the screen
 void clearFrameBuffer() {
-  for (i = 0; i < 8; i++) {
+  for (int i = 0; i < 8; i++) {
     frameBuffer[i] = 0;
   }
   // Reset the message to the beginning

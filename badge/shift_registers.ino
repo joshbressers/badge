@@ -27,9 +27,6 @@ void runTick() {
  * 
  * All 3 shift registes share a common clock and latch
  * 
- * Because of this, it's impossible to read all 7 bits from the button register
- * (or it is and I can't figure it out)
- * 
  * As soon as we trip the latch, we start to write and read bits
  * 
  */
@@ -39,12 +36,12 @@ void shiftRegisters() {
       OLD_BUTTON = CUR_BUTTON;
 
       // Loop for each row
-      for (j = 0; j < 8; j++) {
+      for (int j = 0; j < 8; j++) {
         digitalWrite(latchPin, LOW);
         // Loop for each col, writing/reading one bit per clock
         // Set the button to 0, we will fill in the bits as we go
         CUR_BUTTON = 0;
-        for (i = 0; i < 8; i++)  {
+        for (int i = 0; i < 8; i++)  {
 
           // In this code we have to extract the relevant bits to shift into 
           // the register

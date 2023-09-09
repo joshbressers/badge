@@ -29,7 +29,7 @@ void screenTest() {
       else pattern = 0x55;
     }
     if (TICK(10)) {
-      for (i = 0; i < 8; i++) {
+      for (int i = 0; i < 8; i++) {
         frameBuffer[i] = pattern;
       }
     }

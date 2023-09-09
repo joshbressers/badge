@@ -16,23 +16,9 @@
 #define dataPin2 3 // SR 2
 #define buttonPin 4 // Button Input
 
-// Random variables shared by things
-uint8_t i, j;
-
 // Frame buffer variables
 byte currentRow = 0;
 byte frameBuffer[] = {0,0,0,0,0,0,0,0};
-
-// Global state tracking
-enum State {
-  HOME,
-  MENU,
-  MENU2, // Private state for menu
-  DOT,
-  SCREEN,
-  BUTTON
-};
-State currentState = HOME;
 
 // How many ticks should we wait until we return to home screen
 #define HOME_TIMEOUT 2000
@@ -41,6 +27,9 @@ State currentState = HOME;
 const char defaultMessage[] PROGMEM = "Badge Test ";
 const char* message;
 unsigned int messageLen = 0;
+
+const char scoreMessage[] PROGMEM = "Score: ";
+
 
 // Constants used when writing the message to the framebuffer
 unsigned long messageCount = 0;
@@ -52,12 +41,16 @@ unsigned long lastButton = 0;
 // on every loop
 unsigned long currentTick = 0;
 
-// TICK can be used for delay loops. Pass it in a value so you only execute
+// State booleans
+bool donePrinting = false;
+bool randomSet = false;
+
+// TICK can be used for delay loops. Pass it in a value to return true
 // after a certain amount of time has passed.
 #define TICK(the_tick) (!(currentTick % the_tick))
 
 // This has to be run by every function. A timeout of zero can be passed in
-// to not every timeout. If no timeout is used it's up to the function
+// to not ever timeout. If no timeout is used it's up to the function
 // to return
 #define LOOP(loop_define_timeout) {\
   runTick();\
@@ -83,8 +76,13 @@ uint8_t OLD_BUTTON = 0x00;
 // A held down button will return false
 #define NEW_BUTTON(the_btn) ((CUR_BUTTON & the_btn) && !(OLD_BUTTON & the_btn))
 
+// Return true if the button is pressed
+#define PUSH_BUTTON(the_btn) (CUR_BUTTON & the_btn)
+
 // Define our functions here
 void setMessage(unsigned char *newMessage);
+void setMemMessage(unsigned char *newMessage);
+void printMessage(unsigned char *newMessage, bool memMessage);
 void shiftRegisters();
 void showMessage();
 void clearFrameBuffer();
@@ -93,5 +91,6 @@ void showMenu();
 void screenTest();
 void buttonTest();
 void runTick();
+void pongGame();
 
 #endif
