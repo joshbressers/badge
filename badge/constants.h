@@ -94,5 +94,6 @@ void screenTest();
 void buttonTest();
 void runTick();
 void pongGame();
+void spaceGame();
 
 #endif

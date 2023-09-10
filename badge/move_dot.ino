@@ -83,3 +83,72 @@ void pongGame() {
     }
   }
 }
+
+void spaceGame() {
+  unsigned int score = 0;
+
+  // The ship will be offset by one
+  // If we try to use -1 as the leftmost range
+  // We end up with the problme of >-1 to <1 is zero,
+  // Which is too wide of a range. Think of zero on
+  // ship as the middle, not the side
+  float ship_x = 4;
+  float bullet_x = 0;
+  float bullet_y = 0;
+
+  float alien_x = 0;
+  float alien_y = -1;
+
+  while(true) {
+    LOOP(0);
+    clearFrameBuffer();
+
+    if (alien_y < 0) {
+      // No alien, let's add one
+      // Also, why are aliens always the bad guys?
+      // Very Ender's Game
+
+      alien_y = 0;
+      alien_x = random(0, 7);
+      
+    } else if (alien_y >= 7) {
+      printScore(score);
+      return;
+    }else {
+      frameBuffer[(int)alien_x] = frameBuffer[(int)alien_x] | 0x01 << (int)alien_y;
+      frameBuffer[(int)alien_x + 1] = frameBuffer[(int)alien_x + 1] | 0x01 << (int)alien_y;
+      alien_y = alien_y + 0.005 + score * 0.0001;
+    }
+
+    
+    if (PUSH_BUTTON(BTN_RIGHT) && ship_x < 7) {
+      ship_x = ship_x + 0.04;
+    }
+    if (PUSH_BUTTON(BTN_LEFT) && ship_x > 0) {
+      ship_x = ship_x - 0.04;
+    }
+    if (NEW_BUTTON(BTN_A) && bullet_y <= 0) {
+      bullet_x = ship_x;
+      bullet_y = 6;
+    }
+
+    if (bullet_y > 0) {
+      frameBuffer[int(bullet_x)] = frameBuffer[(int)bullet_x] | 0x20 >> (6 - (int)bullet_y);
+
+      if ((int(bullet_y) == (int)alien_y) && ((int)bullet_x >= (int)alien_x && (int)bullet_x <= ((int)alien_x + 1))) {
+        alien_y = -10;
+        alien_x = -10;
+        score++;
+      }
+      
+      bullet_y = bullet_y - 0.05;
+    }
+
+    // Draw the ship
+    if (ship_x > 0)
+      frameBuffer[(int)ship_x - 1] = frameBuffer[(int)ship_x - 1] | 0x80;
+    frameBuffer[(int)ship_x] = frameBuffer[(int)ship_x] | 0xC0;
+    if (ship_x <= 6)
+      frameBuffer[(int)ship_x + 1] = frameBuffer[(int)ship_x + 1] | 0x80;
+  }
+}

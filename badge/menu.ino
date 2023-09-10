@@ -15,6 +15,7 @@ const char menu1[] PROGMEM = "Button Test ";
 const char menu2[] PROGMEM = "Move Dot ";
 const char menu3[] PROGMEM = "Screen Test ";
 const char menu4[] PROGMEM = "Pong ";
+const char menu5[] PROGMEM = "Space ";
 
 typedef struct badgeStruct {
   const char *programName;
@@ -33,6 +34,10 @@ badgeStruct thePrograms[] = {
   {
     menu4,
     (*pongGame)
+  },
+  {
+    menu5,
+    (*spaceGame)
   },
   {
     menu1,

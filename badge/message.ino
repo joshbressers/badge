@@ -16,11 +16,11 @@ void printScore(unsigned int score) {
 
   // We have to extract the score digits
   // They are reversed
-  while (score) {
+  do {
     digit = score % 10;
     score = score / 10;
     scoreString[i++] = digit + 0x30;
-  }
+  } while (score);
 
   // We need to reverse the string to fix the digits
   for(int j = 1; j <= i/2; j++) {
