@@ -24,11 +24,11 @@ byte frameBuffer[] = {0,0,0,0,0,0,0,0};
 #define HOME_TIMEOUT 2000
 
 // Message display constants
-const char defaultMessage[] PROGMEM = "Badge Test ";
+const char defaultMessage[] PROGMEM = "Default Badge Message ";
 const char* message;
 unsigned int messageLen = 0;
 
-const char scoreMessage[] PROGMEM = "Score: ";
+const char scoreMessage[] PROGMEM = "Score ";
 unsigned char scoreString[10];
 
 

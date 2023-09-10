@@ -11,9 +11,9 @@
 
 // Menu static text
 const char menu0[] PROGMEM = "Menu ";
-const char menu1[] PROGMEM = "Button Test ";
-const char menu2[] PROGMEM = "Move Dot ";
-const char menu3[] PROGMEM = "Screen Test ";
+const char menu1[] PROGMEM = "Test Buttons ";
+const char menu2[] PROGMEM = "Dot ";
+const char menu3[] PROGMEM = "Test Screen ";
 const char menu4[] PROGMEM = "Pong ";
 const char menu5[] PROGMEM = "Space ";
 
