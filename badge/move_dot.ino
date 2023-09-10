@@ -33,16 +33,16 @@ void moveDot() {
 }
 
 void pongGame() {
-  float ball_x = 4;
+  float ball_x = 3;
   float ball_y = 2;
   unsigned int score = 0;
-  float ball_x_vel = 0.01;
+  float ball_x_vel = 0.012;
   float ball_y_vel = 0.01;
 
   float paddle_x = 0;
 
-  if (!ball_x_vel) ball_x_vel = 0.05;
-  if (!ball_y_vel) ball_y_vel = 0.05;
+  if (random(2)) ball_x_vel = -0.012;
+  if (random(2)) ball_y_vel = -0.01;
 
   while(true) {
     LOOP(0);
@@ -68,6 +68,8 @@ void pongGame() {
     if (ball_y >= 7) {
       if ((ball_x >= paddle_x) && (ball_x <= paddle_x + 3 )) {
         score++;
+        if (!random(3)) ball_x_vel = ball_x_vel * -1;
+
       } else {
         printScore(score);
         return;
