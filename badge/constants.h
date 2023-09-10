@@ -29,6 +29,7 @@ const char* message;
 unsigned int messageLen = 0;
 
 const char scoreMessage[] PROGMEM = "Score: ";
+unsigned char scoreString[10];
 
 
 // Constants used when writing the message to the framebuffer
@@ -83,6 +84,7 @@ uint8_t OLD_BUTTON = 0x00;
 void setMessage(unsigned char *newMessage);
 void setMemMessage(unsigned char *newMessage);
 void printMessage(unsigned char *newMessage, bool memMessage);
+void printScore(unsigned int score);
 void shiftRegisters();
 void showMessage();
 void clearFrameBuffer();

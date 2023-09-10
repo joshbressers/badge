@@ -4,6 +4,37 @@
 
 bool progmemMessage = true;
 
+// Turn the score into a string
+// Using sprintf takes up 2K of program space
+void printScore(unsigned int score) {
+  uint8_t i = 0;
+  unsigned int digit;
+
+  printMessage(scoreMessage, false);
+
+  scoreString[i++] = ' ';
+
+  // We have to extract the score digits
+  // They are reversed
+  while (score) {
+    digit = score % 10;
+    score = score / 10;
+    scoreString[i++] = digit + 0x30;
+  }
+
+  // We need to reverse the string to fix the digits
+  for(int j = 1; j <= i/2; j++) {
+    scoreString[0] = scoreString[j]; // We are using slot 0 as our temp variable
+    scoreString[j] = scoreString[i-j];
+    scoreString[i-j] = scoreString[0];
+  }
+  scoreString[0] = ' '; // Don't forget to put this back
+  scoreString[i++] = ' ';
+  scoreString[i] = 0x00; // NULL terminator
+
+  printMessage(scoreString, true);
+}
+
 // Print a message then return
 void printMessage(unsigned char *newMessage, bool memMessage) {
   if (memMessage) {

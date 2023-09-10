@@ -38,8 +38,6 @@ void pongGame() {
   unsigned int score = 0;
   float ball_x_vel = 0.01;
   float ball_y_vel = 0.01;
-  unsigned char myScore[10];
-
 
   float paddle_x = 0;
 
@@ -71,9 +69,7 @@ void pongGame() {
       if ((ball_x >= paddle_x) && (ball_x <= paddle_x + 3 )) {
         score++;
       } else {
-        printMessage(scoreMessage, false);
-        sprintf(myScore, " %d  ", score);
-        printMessage(myScore, true);
+        printScore(score);
         return;
       }
     }
