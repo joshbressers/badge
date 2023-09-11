@@ -41,8 +41,8 @@ void pongGame() {
 
   float paddle_x = 0;
 
-  if (random(2)) ball_x_vel = -0.012;
-  if (random(2)) ball_y_vel = -0.01;
+  if (RANDOM(2)) ball_x_vel = -0.012;
+  if (RANDOM(2)) ball_y_vel = -0.01;
 
   while(true) {
     LOOP(0);
@@ -68,7 +68,7 @@ void pongGame() {
     if (ball_y >= 7) {
       if ((ball_x >= paddle_x) && (ball_x <= paddle_x + 3 )) {
         score++;
-        if (!random(3)) ball_x_vel = ball_x_vel * -1;
+        if (!RANDOM(3)) ball_x_vel = ball_x_vel * -1;
 
       } else {
         printScore(score);
@@ -111,7 +111,7 @@ void spaceGame() {
       // Very Ender's Game
 
       alien_y = 0;
-      alien_x = random(0, 7);
+      alien_x = RANDOM(7);
       
     } else if (alien_y >= 7) {
       printScore(score);
@@ -119,7 +119,7 @@ void spaceGame() {
     }else {
       frameBuffer[(int)alien_x] = frameBuffer[(int)alien_x] | 0x01 << (int)alien_y;
       frameBuffer[(int)alien_x + 1] = frameBuffer[(int)alien_x + 1] | 0x01 << (int)alien_y;
-      alien_y = alien_y + 0.005 + score * 0.0001;
+      alien_y = alien_y + 0.005 + score * 0.001;
     }
 
     
@@ -140,6 +140,7 @@ void spaceGame() {
       if ((int(bullet_y) == (int)alien_y) && ((int)bullet_x >= (int)alien_x && (int)bullet_x <= ((int)alien_x + 1))) {
         alien_y = -10;
         alien_x = -10;
+        bullet_y = -10;
         score++;
       }
       

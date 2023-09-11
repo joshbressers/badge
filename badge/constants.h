@@ -44,7 +44,6 @@ unsigned long currentTick = 0;
 
 // State booleans
 bool donePrinting = false;
-bool randomSet = false;
 
 // TICK can be used for delay loops. Pass it in a value to return true
 // after a certain amount of time has passed.
@@ -59,6 +58,10 @@ bool randomSet = false;
     return;\
   }\
 }
+
+// This is random enough for us. The Arduino random() code
+// uses up 500 bytes
+#define RANDOM(rand_ceiling) (currentTick % rand_ceiling)
 
 // Button Constants
 #define BTN_A 0x20
