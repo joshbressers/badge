@@ -19,14 +19,14 @@ void buttonTest() {
 }
 
 void screenTest() {
-  static uint8_t pattern = 0xAA;
+  uint8_t pattern = 0x00;
 
   while (true) {
     LOOP(0);
 
     if (TICK(100)) {
-      if (pattern & 0x01) pattern = 0xAA;
-      else pattern = 0x55;
+      if (!pattern) pattern = 0xFF;
+      else pattern = pattern << 1;
     }
     if (TICK(10)) {
       for (int i = 0; i < 8; i++) {
