@@ -4,7 +4,7 @@ The code that makes everything go is in the badge directory. This is meant to be
 
 If you haven't done so, you should follow the instructions in the README about programming the ATTINY85 with an Arduino. Even if you're not using an Arduino to program the chip, there are instructions there for getting the Arduino environment configured. Both 1.x and 2.x Arduino IDEs work.
 
-The files are hopefully well commented so what's happening in them is clear.
+The files are hopefully well commented so what's happening in them is clear. Keep in mind that most decisions made were to make things as simple and efficient as possible. There's very little memory and not much program space. Sometimes using more memory was used to make things easier for humans. Like using floats in the pong game. Integers take up less room and would be faster, but would be harder to understand the code.
 
 ## File layout
 
@@ -33,7 +33,7 @@ If we turn that into binary, we can see what the letter looks like
 01111100
 00000000
 ```
-or if we rotate it and use some friendlier character
+or if we rotate it and use some friendlier characters
 ```
 ..#...
 .#.#..
@@ -54,9 +54,9 @@ If you want to add new characters, do it at the end of the array.
 
 The [shift_registers.ino](badge/shift_registers.ino) file is where we read/write to the shift registers. This is how we update the screen and read the buttons. This is the file that actually makes all the hardware work.
 
-The various millis() functions of the Arduino aren't reliable on the ATTINY85 as the clock speed is more of a suggestion. Rather than try to use those, we have a variable called currentTick in this file that ticks up one every loop of the application and reads/writes the shift registers. Every subroutine has to call this function.
+The various millis() functions of the Arduino aren't reliable on the ATTINY85 as the clock speed is more of a suggestion. Rather than try to use those, we have a variable called currentTick in this file that ticks up one every loop of the application and reads/writes the shift registers. Every subroutine has to call the runTick() function while it loops.
 
-We could consider using an timer interrupt for this someday. How to handle a partially updated frameBuffer is why this hasn't happened yet (it's possible things update fast enough it won't matter)
+We could consider using an timer interrupt for this someday. How to handle a partially updated frameBuffer is why this hasn't happened yet (it's possible things update fast enough it won't matter).
 
 The shiftRegisters() function is mostly unexciting but also what drives everything. It pulses the latches and clocks then reads/writes the data. Whatever is in the frameBuffer variable gets written to the screen. Whatever buttons are pressed get written to CUR_BUTTON.
 
