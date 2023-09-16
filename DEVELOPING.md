@@ -1,0 +1,79 @@
+## Developing for the badge
+
+The code that makes everything go is in the badge directory. This is meant to be used with the Arduino development environment.
+
+If you haven't done so, you should follow the instructions in the README about programming the ATTINY85 with an Arduino. Even if you're not using an Arduino to program the chip, there are instructions there for getting the Arduino environment configured. Both 1.x and 2.x Arduino IDEs work.
+
+The files are hopefully well commented so what's happening in them is clear.
+
+## File layout
+
+There are a few critical files for the operation of the badge.
+
+### badge.ino
+The [badge.ino](badge/badge.ino) file is where the setup and main loop exist. If you've ever programmed for an Arduino before, this should be familiar to you. If you haven't, you may want to look at some Arduino programming tutorials first.
+
+### constants.h
+[constants.h](badge/constants.h) is where all the constants are means to be held. These are the things used across the various functions that make the badge work. When possible you should use #define instead of declaring variables. There's not much memory, variables are expensive. This file should be very well commented. If something isn't clear please file an issue.
+
+### font.h
+[font.h](badge/font.h) is where the font to scroll a message across the screen exists. It's an 8x5 font that takes up 6 bytes per character (every character has a space after it).
+
+For example the letter A is:
+```
+0x7C, 0x12, 0x11, 0x12, 0x7C, 0x00,
+```
+If we turn that into binary, we can see what the letter looks like
+
+```
+01111100
+00010010
+00010001
+00010010
+01111100
+00000000
+```
+or if we rotate it and use some friendlier character
+```
+..#...
+.#.#..
+#...#.
+#...#.
+#####.
+#...#.
+#...#.
+......
+```
+Every byte is a column in the font
+
+The font characters are in ASCII order, so we can address them by converting a byte character into a uint8_t and subtracting 0x20.
+
+If you want to add new characters, do it at the end of the array.
+
+### shift_registers.ino
+
+The [shift_registers.ino](badge/shift_registers.ino) file is where we read/write to the shift registers. This is how we update the screen and read the buttons. This is the file that actually makes all the hardware work.
+
+The various millis() functions of the Arduino aren't reliable on the ATTINY85 as the clock speed is more of a suggestion. Rather than try to use those, we have a variable called currentTick in this file that ticks up one every loop of the application and reads/writes the shift registers. Every subroutine has to call this function.
+
+We could consider using an timer interrupt for this someday. How to handle a partially updated frameBuffer is why this hasn't happened yet (it's possible things update fast enough it won't matter)
+
+The shiftRegisters() function is mostly unexciting but also what drives everything. It pulses the latches and clocks then reads/writes the data. Whatever is in the frameBuffer variable gets written to the screen. Whatever buttons are pressed get written to CUR_BUTTON.
+
+### message.ino
+[message.ino](badge/message.ino) is the file that scrolls text on the screen. It has a lot of comments, go read them.
+
+Most of the text that is displayed is stored in PROGMEM. This is a special variable in the Arduino universe that places the text in the 8K of program space instead of our 512 bytes of RAM. As such, PROGMEM needs to be read differently than a normal variable.
+
+We have a variable in the code called a "progmemMessage". It's possible to print a string from memory, or a string from PROGMEM space. You just have to call either setMessage for PROGMEM strings or setMemMessage for memory strings.
+
+This is all confusing, the printScore function is probably worth looking at. There are probably ways to make this simpler with some C++ magic.
+
+### menu.ino
+[menu.ino](badge/menu.ino) is where we drive the main menu from. If you want to add a program, you have to register it here. It's pretty easy to understand, go look at it.
+
+### tests.ino
+[tests.ino](badge/tests.ino) contain two tests. One to test the buttons and one to show a pattern on the screen. They don't take up very much space and help with debugging.
+
+### move_dot.ino
+[move_dot.ino](badge/move_dot.ino) is where the games are currently held. The name is a hold over from a simpler time. There's no reason to add games here, it was a way to avoid adding too many files.
