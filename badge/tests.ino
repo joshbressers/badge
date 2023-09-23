@@ -40,3 +40,18 @@ void screenTest() {
     WAIT;
   }
 }
+
+void testWait() {
+  unsigned int timeCounter = 0;
+  // First, we just wait for the next frame update
+  WAIT;
+
+  // Now, let's see how long we have
+  while(!tickDone) timeCounter++;
+
+  while (true) {
+    LOOP(HOME_TIMEOUT);
+    printScore(timeCounter);
+  }
+
+}

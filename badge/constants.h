@@ -21,7 +21,7 @@ byte currentRow = 0;
 byte volatile frameBuffer[] = {0,0,0,0,0,0,0,0};
 
 // How many ticks should we wait until we return to home screen
-#define HOME_TIMEOUT 1000
+#define HOME_TIMEOUT 500
 
 // Message display constants
 const char defaultMessage[] PROGMEM = "Default Badge Message ";
@@ -34,7 +34,7 @@ unsigned char scoreString[10];
 
 // Constants used when writing the message to the framebuffer
 unsigned long messageCount = 0;
-#define messageDelay 20
+#define messageDelay 5
 unsigned long volatile lastButton = 0;
 
 // Tick constants
