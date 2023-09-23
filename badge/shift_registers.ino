@@ -29,11 +29,13 @@ void shiftRegisters() {
       OLD_BUTTON = CUR_BUTTON;
 
       // Loop for each row
-      for (int j = 0; j < 8; j++) {
+      for (int j = 0; j < 9; j++) {
         digitalWrite(latchPin, LOW);
         // Loop for each col, writing/reading one bit per clock
         // Set the button to 0, we will fill in the bits as we go
         CUR_BUTTON = 0;
+
+        if (j == 8) currentRow = 0;
         for (int i = 0; i < 8; i++)  {
 
           // In this code we have to extract the relevant bits to shift into 
