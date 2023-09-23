@@ -15,6 +15,8 @@ void buttonTest() {
     if (CUR_BUTTON & BTN_DOWN) frameBuffer[1] = frameBuffer[1] | 0x10; // Down
     if (CUR_BUTTON & BTN_UP) frameBuffer[1] = frameBuffer[1] | 0x04; // Up
     if (CUR_BUTTON & BTN_LEFT) frameBuffer[0] = 0x08; // Left
+
+    WAIT;
   }
 }
 
@@ -22,7 +24,6 @@ void screenTest() {
   uint8_t pattern = 0x00;
 
   while (true) {
-    LOOP(0);
 
     if (TICK(100)) {
       if (!pattern) pattern = 0xFF;
@@ -33,8 +34,9 @@ void screenTest() {
         frameBuffer[i] = pattern;
       }
     }
-    if (NEW_BUTTON(BTN_A)) {
+    if (buttonPressed(BTN_B, true)) {
       return;
     }
+    WAIT;
   }
 }

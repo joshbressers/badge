@@ -61,18 +61,18 @@ void showMenu() {
     LOOP(HOME_TIMEOUT);
 
     
-    if (NEW_BUTTON(BTN_DOWN)) {
+    if (buttonPressed(BTN_DOWN, true)) {
 
       if (menuIndex < (menuMax - 1)) {
         menuIndex++;
         menuChanged = true;
       }
-    } else if (NEW_BUTTON(BTN_UP)) {
+    } else if (buttonPressed(BTN_UP, true)) {
       if (menuIndex > 0) {
         menuIndex--;
         menuChanged = true;
       }
-    } else if (NEW_BUTTON(BTN_A)) {
+    } else if (buttonPressed(BTN_A, true)) {
       if (thePrograms[menuIndex].badgeFunction != NULL) {
         (*thePrograms[menuIndex].badgeFunction)();
         menuIndex = 0;
@@ -85,5 +85,9 @@ void showMenu() {
     }
 
     showMessage();
+    while(!tickDone) {
+      // Just wait for the frame to finish
+    }
+    tickDone = false;
   }
 }

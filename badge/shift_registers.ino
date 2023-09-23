@@ -2,17 +2,10 @@
 
 #include "constants.h"
 
-void runTick() {
-  
-  // We count the number of loops instead of using millis()
-  // On the ATTINY85 chip the millis() retuns odd things
-  currentTick++;
+ISR (TIMER1_OVF_vect) {
 
-  if (CUR_BUTTON) {
-    lastButton = 0;
-  } else {
-    lastButton++;
-  }
+  currentTick++;
+  tickDone = true;
 
   shiftRegisters();
 }
@@ -65,5 +58,24 @@ void shiftRegisters() {
         currentRow = currentRow << 1;
         digitalWrite(latchPin, HIGH);
         digitalWrite(latchPin, LOW);
-      }  
+      }
+  
+      if (CUR_BUTTON) {
+        lastButton = 0;
+      } else {
+        lastButton++;
+      }
+}
+
+bool buttonPressed(byte myButton, bool newPress) {
+  if (newPress) {
+    if ((CUR_BUTTON & myButton) && !(OLD_BUTTON & myButton)) {
+      OLD_BUTTON = CUR_BUTTON;
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return (CUR_BUTTON & myButton);
+  }
 }

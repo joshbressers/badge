@@ -8,20 +8,19 @@ void moveDot() {
   int8_t y_vel = 0;
 
   while(true) {
-    LOOP(0);
     clearFrameBuffer();
   
-    if (NEW_BUTTON(BTN_RIGHT)) x_vel++;
-    if (NEW_BUTTON(BTN_DOWN)) y_vel++;
-    if (NEW_BUTTON(BTN_UP)) y_vel--;
-    if (NEW_BUTTON(BTN_LEFT)) x_vel--;
+    if (buttonPressed(BTN_RIGHT, true)) x_vel++;
+    if (buttonPressed(BTN_DOWN, true)) y_vel++;
+    if (buttonPressed(BTN_UP, true)) y_vel--;
+    if (buttonPressed(BTN_LEFT, true)) x_vel--;
 
-    if (NEW_BUTTON(BTN_A)) {
+    if (buttonPressed(BTN_A, true)) {
       x = 4 * 32;
       y = 4 * 32;
       x_vel = 0;
       y_vel = 0;
-    } else if (NEW_BUTTON(BTN_B)) {
+    } else if (buttonPressed(BTN_B, true)) {
       return;
     }
 
@@ -29,6 +28,7 @@ void moveDot() {
     y = y + y_vel;
 
     frameBuffer[x/32] = 1 << (y/32);
+    WAIT;
   }
 }
 
@@ -36,26 +36,25 @@ void pongGame() {
   float ball_x = 3;
   float ball_y = 2;
   unsigned int score = 0;
-  float ball_x_vel = 0.012;
-  float ball_y_vel = 0.01;
+  float ball_x_vel = 0.02;
+  float ball_y_vel = 0.015;
 
   float paddle_x = 0;
 
-  if (RANDOM(2)) ball_x_vel = -0.012;
-  if (RANDOM(2)) ball_y_vel = -0.01;
+  if (RANDOM(2)) ball_x_vel = -0.02;
+  if (RANDOM(2)) ball_y_vel = -0.015;
 
   while(true) {
-    LOOP(0);
     clearFrameBuffer();
   
-    if (PUSH_BUTTON(BTN_RIGHT) && paddle_x < 5) {
-      paddle_x = paddle_x + 0.05;
+    if (buttonPressed(BTN_RIGHT, false) && paddle_x < 5) {
+      paddle_x = paddle_x + 0.08;
     }
-    if (PUSH_BUTTON(BTN_LEFT) && paddle_x > 0) {
-      paddle_x = paddle_x - 0.05;
+    if (buttonPressed(BTN_LEFT, false) && paddle_x > 0) {
+      paddle_x = paddle_x - 0.08;
     }
 
-    if (NEW_BUTTON(BTN_B)) {
+    if (buttonPressed(BTN_B, true)) {
       return;
     }
 
@@ -83,6 +82,7 @@ void pongGame() {
     for (int i = 0; i < 3; i++) {
       frameBuffer[(int)paddle_x + i] = frameBuffer[(int)paddle_x + i] | 0x80;
     }
+    WAIT;
   }
 }
 
@@ -102,7 +102,6 @@ void spaceGame() {
   float alien_y = -1;
 
   while(true) {
-    LOOP(0);
     clearFrameBuffer();
 
     if (alien_y < 0) {
@@ -119,17 +118,17 @@ void spaceGame() {
     }else {
       frameBuffer[(int)alien_x] = frameBuffer[(int)alien_x] | 0x01 << (int)alien_y;
       frameBuffer[(int)alien_x + 1] = frameBuffer[(int)alien_x + 1] | 0x01 << (int)alien_y;
-      alien_y = alien_y + 0.005 + score * 0.001;
+      alien_y = alien_y + 0.01 + score * 0.001;
     }
 
     
-    if (PUSH_BUTTON(BTN_RIGHT) && ship_x < 7) {
-      ship_x = ship_x + 0.04;
+    if (buttonPressed(BTN_RIGHT, false) && ship_x < 7) {
+      ship_x = ship_x + 0.08;
     }
-    if (PUSH_BUTTON(BTN_LEFT) && ship_x > 0) {
-      ship_x = ship_x - 0.04;
+    if (buttonPressed(BTN_LEFT, false) && ship_x > 0) {
+      ship_x = ship_x - 0.08;
     }
-    if (NEW_BUTTON(BTN_A) && bullet_y <= 0) {
+    if (buttonPressed(BTN_A, true) && bullet_y <= 0) {
       bullet_x = ship_x;
       bullet_y = 6;
     }
@@ -144,14 +143,16 @@ void spaceGame() {
         score++;
       }
       
-      bullet_y = bullet_y - 0.05;
+      bullet_y = bullet_y - 0.08;
     }
 
     // Draw the ship
     if (ship_x > 0)
       frameBuffer[(int)ship_x - 1] = frameBuffer[(int)ship_x - 1] | 0x80;
     frameBuffer[(int)ship_x] = frameBuffer[(int)ship_x] | 0xC0;
-    if (ship_x <= 6)
+    if (ship_x <= 7)
       frameBuffer[(int)ship_x + 1] = frameBuffer[(int)ship_x + 1] | 0x80;
+
+    WAIT;
   }
 }

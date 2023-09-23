@@ -43,9 +43,9 @@ void printMessage(unsigned char *newMessage, bool memMessage) {
     setMessage(newMessage);
   }
   while (true) {
-    LOOP(0);
     showMessage();
     if (donePrinting) return;
+    WAIT;
   }
 }
 
@@ -86,7 +86,6 @@ void showMessage()
 {
   // Scroll the display at a reasonable speed
   if (TICK(messageDelay)) {
-
     /*
      * Copy message data into framebuffer
      * 
