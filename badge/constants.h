@@ -64,12 +64,12 @@ bool donePrinting = false;
 #define RANDOM(rand_ceiling) (currentTick % rand_ceiling)
 
 // Button Constants
-#define BTN_A 0x20
-#define BTN_B 0x10
-#define BTN_LEFT 0x02
-#define BTN_RIGHT 0x08
-#define BTN_UP 0x01
-#define BTN_DOWN 0x04
+#define BTN_A 0x10
+#define BTN_B 0x20
+#define BTN_LEFT 0x04
+#define BTN_RIGHT 0x02
+#define BTN_UP 0x08
+#define BTN_DOWN 0x01
 
 uint8_t CUR_BUTTON = 0x00;
 uint8_t OLD_BUTTON = 0x00;
