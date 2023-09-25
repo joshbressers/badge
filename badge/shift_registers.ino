@@ -2,12 +2,12 @@
 
 #include "constants.h"
 
+// This is the function run by the timer interrupt
 ISR (TIMER1_OVF_vect) {
 
   currentTick++;
-  tickDone = true;
-
   shiftRegisters();
+  tickDone = true;
 }
 
 
@@ -24,44 +24,69 @@ ISR (TIMER1_OVF_vect) {
  * 
  */
 void shiftRegisters() {
-      digitalWrite(latchPin, HIGH);
+  
+      //digitalWrite(latchPin, HIGH);
+      PORTB |= (1 << PB1);
       uint8_t currentRow = 1; // A bit vector for the LED row
       OLD_BUTTON = CUR_BUTTON;
+      CUR_BUTTON = 0;
 
       // Loop for each row
       for (int j = 0; j < 9; j++) {
-        digitalWrite(latchPin, LOW);
+        //digitalWrite(latchPin, LOW);
+        PORTB &= ~(1 << PB1);
         // Loop for each col, writing/reading one bit per clock
-        // Set the button to 0, we will fill in the bits as we go
-        CUR_BUTTON = 0;
 
+        // We have to clear the last column before we return
+        // so just loop one extra time
         if (j == 8) currentRow = 0;
+        
         for (int i = 0; i < 8; i++)  {
 
           // In this code we have to extract the relevant bits to shift into 
           // the register
-          digitalWrite(dataPin1, !!(currentRow & (1 << (i))));
+          //digitalWrite(dataPin1, !!(currentRow & (1 << (i))));
+          if (currentRow & (1 << (i))) {
+            PORTB |= (1 << PB0);
+          } else {
+            PORTB &= ~(1 << PB0);
+          }
 
-          // We write the data in backwards to scroll left
-          // (remove the 7 - to scroll right, but that would be weird)
-          digitalWrite(dataPin2, !(frameBuffer[j] & (1 << (7 - i))));
+          // Only run these if we're writing actual data. Loop 8 is to clear
+          // The last column, this will save some cycles
+          if (j < 8) {
+            // We write the data in backwards to scroll left
+            // (remove the 7 - to scroll right, but that would be weird)
+            // Also, on is zero, so we negate what's in the frame buffer
+            //digitalWrite(dataPin2, !(frameBuffer[j] & (1 << (7 - i))));
+            if (!(frameBuffer[j] & (1 << (7 - i)))) {
+              PORTB |= (1 << PB3);
+            } else {
+              PORTB &= ~(1 << PB3);
+            }
 
-          // Shift in the button presses
-          CUR_BUTTON = CUR_BUTTON << 1;
-          if (digitalRead(buttonPin))
-            CUR_BUTTON = CUR_BUTTON | 0x01;
+            // Shift in the button presses
+            CUR_BUTTON = CUR_BUTTON << 1;
+            //if (digitalRead(buttonPin))
+            if (PINB & (1 << PB4))
+              CUR_BUTTON = CUR_BUTTON | 0x01;
+          }
 
           // Pulse the clock
-          digitalWrite(clockPin, HIGH);
-          digitalWrite(clockPin, LOW);
+          //digitalWrite(clockPin, HIGH);
+          PORTB |= (1 << PB2);
+          //digitalWrite(clockPin, LOW);
+          PORTB &= ~(1 << PB2);
           
         }
         // Shift the row bit
         currentRow = currentRow << 1;
-        digitalWrite(latchPin, HIGH);
-        digitalWrite(latchPin, LOW);
+        //digitalWrite(latchPin, HIGH);
+        PORTB |= (1 << PB1);
+        //digitalWrite(latchPin, LOW);
+        PORTB &= ~(1 << PB1);        
       }
-  
+
       if (CUR_BUTTON) {
         lastButton = 0;
       } else {

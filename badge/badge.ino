@@ -20,7 +20,7 @@ TIMSK = _BV(TOIE1); // Interrupt on overflow
 // Start timer in CTC mode; prescaler = 512;
 // This controls the framerate
 // 512 is 60FPS
-// Lower FPS menas more time to do things between frames
+// Lower FPS means more time to do things between frames
 TCCR1 = _BV(CS13) | _BV(CS11);
 
 /*
