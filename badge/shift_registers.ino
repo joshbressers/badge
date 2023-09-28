@@ -84,7 +84,18 @@ void shiftRegisters() {
         //digitalWrite(latchPin, HIGH);
         PORTB |= (1 << PB1);
         //digitalWrite(latchPin, LOW);
-        PORTB &= ~(1 << PB1);        
+        PORTB &= ~(1 << PB1);
+
+        /*
+         * We have to slow things down in this loop
+         * The optimizations ot make the code smaller also made it a lot faster
+         * Too fast
+         * If we don't let the LED columns stay on for a little while,
+         * they appear very very dim. This loop could be shortened as a way to decrease brightness
+         */
+        if (j < 8) {
+          for (int l = 0; l < 1024; l++) __asm__("nop\n\t");
+        }
       }
 
       if (CUR_BUTTON) {
