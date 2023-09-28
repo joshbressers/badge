@@ -6,7 +6,7 @@
 
   (title_block
     (title "Badge Prototype")
-    (rev "002")
+    (rev "005")
   )
 
   (lib_symbols
