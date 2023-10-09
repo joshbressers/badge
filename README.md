@@ -19,6 +19,8 @@ The PCB can be shipped off to one of the countless PCB manufacturers that exist.
 
 The PCB was designed using KiCad, version 7.0 to be precise. Your mileage may very if you try to use other versions.
 
+![](<images/PCB.png>)
+
 ## Parts List
 You can generate a bill of materials from KiCad, but for the sake of simplicity here is a list of all the parts.
 
