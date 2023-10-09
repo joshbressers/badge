@@ -1,4 +1,7 @@
 # Open Badge Project
+
+![](<images/badge.gif>)
+
 This is the Open Badge Project. The idea behind this is to have a very low cost, low power electronic badge. These could be built just for fun, or if you're throwing a conference, feel free to use the PCB as the badge, maybe build some, maybe let the folks at the conference build them.
 
 Electronic badges have gotten pretty hip, but they seem to suffer from two primary problems.
