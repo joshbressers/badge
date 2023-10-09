@@ -56,7 +56,7 @@ The [shift_registers.ino](badge/shift_registers.ino) file is where we read/write
 
 The various millis() functions of the Arduino aren't reliable on the ATTINY85 as the clock speed is more of a suggestion. Rather than try to use those, we have a variable called currentTick in this file that ticks up one every loop of the application and reads/writes the shift registers. Every subroutine has to call the runTick() function while it loops.
 
-We could consider using an timer interrupt for this someday. How to handle a partially updated frameBuffer is why this hasn't happened yet (it's possible things update fast enough it won't matter).
+We could consider using an timer interrupt for this someday. How to handle a partially updated frameBuffer is why this hasn't happened yet (it's possible things update fast enough it won't matter). NOTE: I tried doing this in a [branch](https://github.com/joshbressers/badge/tree/interrupt), it's not as impressive as expected.
 
 The shiftRegisters() function is mostly unexciting but also what drives everything. It pulses the latches and clocks then reads/writes the data. Whatever is in the frameBuffer variable gets written to the screen. Whatever buttons are pressed get written to CUR_BUTTON.
 
