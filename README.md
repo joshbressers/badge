@@ -29,8 +29,8 @@ You can generate a bill of materials from KiCad, but for the sake of simplicity 
 - 2 [CD74HC595E](https://www.digikey.com/en/products/detail/texas-instruments/CD74HC595E/1507396) shift registers
 - 1 [CD4021BE](https://www.digikey.com/en/products/detail/texas-instruments/CD4021BE/67261) shift register
 - 1 [2032 battery holder](https://www.digikey.com/en/products/detail/adam-tech/BH-25C-1/13537703)
-- 8 100 Ohm resistors
-- 8 100K Ohm resistors
+- 8 [100 Ohm resistors](https://www.digikey.com/en/products/detail/stackpole-electronics-inc/CF14JT100R/1741261)
+- 8 [100K Ohm resistors](https://www.digikey.com/en/products/detail/stackpole-electronics-inc/CF14JT10K0/1741265)
 - 6 [Buttons](https://www.amazon.com/gp/product/B07VSNN9S2/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&th=1)
 - 1 [8x8 LED Display](https://www.aliexpress.us/item/3256805713726832.html?spm=a2g0o.order_list.order_list_main.11.64611802KkD7xH&gatewayAdapt=glo2usa)
 
