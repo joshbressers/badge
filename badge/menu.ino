@@ -16,6 +16,7 @@ const char menu2[] PROGMEM = "Dot ";
 const char menu3[] PROGMEM = "Test Screen ";
 const char menu4[] PROGMEM = "Pong ";
 const char menu5[] PROGMEM = "Space ";
+const char menu6[] PROGMEM = "Badgetris ";
 
 typedef struct badgeStruct {
   const char *programName;
@@ -27,6 +28,11 @@ badgeStruct thePrograms[] = {
     menu0,
     NULL
   },
+  {
+    menu6,
+    (*badgeBlock)
+  },
+  /*
   {
     menu2,
     (*moveDot)
@@ -48,7 +54,7 @@ badgeStruct thePrograms[] = {
     menu3,
     (*screenTest)
   }
-  
+  */
 };
 
 void showMenu() {
@@ -84,6 +90,15 @@ void showMenu() {
       setMessage(thePrograms[menuIndex].programName);
     }
 
+    showMessage();
+  }
+}
+
+void teh_code() {
+
+  setMessage(codez);
+  while (true) {
+    LOOP(HOME_TIMEOUT);
     showMessage();
   }
 }
