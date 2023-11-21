@@ -5,6 +5,7 @@ void badgeBlock() {
   // Let's use a game board instead of just the framebuffer
   byte screen[8]= {0x00};
   unsigned int score = 0;
+  bool down = false;
 
   // All the blocks are a 4x4 array turned into an integer
   // The bits represent the blocks
@@ -22,19 +23,54 @@ void badgeBlock() {
   short block = blocks[RANDOM(7)];
   int8_t block_x = 3;
   int8_t block_y = -4;
+  byte line;
 
   // This is used to determine if a block needs to be set down
-  bool place = false;
 
   while(true) {
     LOOP(0);
     clearFrameBuffer(); // We don't technically need this
 
-    // We need to update the position better. Every time someone hits a button it ticks
-    if (TICK(200)){
+    // Only move the piece every now and then, or if the down button is pressed
+    if (TICK(200) || down) {
+      down = false;
+      // Check if the piece is hitting anything
+      for (int i = 0; i < 4; i++) {
+        // Get the 4 bytes for the col we care about
+        line = (block >> ((3-i) * 4)) & 0x0F;
+        if (block_y < 0) {
+          // Negative bitshifts aren't a thing
+          line = line >> block_y * -1;
+        } else {
+          line = line << block_y;
+        }
+        if (line & 0x80 || (line << 1) & screen[block_x+i]) {
+          // Do we have a game over?
+          if (block_y == -2) {
+            printScore(score);
+            return;
+          }
+          // Basically the same loop as above, but this time, write the piece into the board
+          for (int i = 0; i < 4; i++) {
+            byte line = (block >> ((3-i) * 4)) & 0x0F;
+            if (block_y < 0) {
+              line = line >> block_y * -1;
+            } else {
+              line = line << block_y;
+            }
+            screen[block_x+i] = screen[block_x+i] | line;
+          }
+          // Get the next piece
+          block_x = 3;
+          block_y = -4;
+          block = blocks[RANDOM(7)];
+          goto out; // Only bad people use goto
+        }
+      }
       block_y++;
+      // Don't increment y if we have to place
     }
-
+out:
     if (NEW_BUTTON(BTN_A)) {
       short new_block = 0x0000;
       // Rotate
@@ -74,10 +110,11 @@ void badgeBlock() {
     // Remove this after testing is done
     // Or not, whatever
     if (NEW_BUTTON(BTN_DOWN)) {
-      block_y++;
-    } else if (NEW_BUTTON(BTN_UP)) {
-      block_y--;
-    }
+      //block_y++;
+      down = true;
+    } //else if (NEW_BUTTON(BTN_UP)) {
+      //block_y--;
+    //}
 
     // Print the screen
     for (int i = 0; i < 8; i++) {
@@ -87,7 +124,7 @@ void badgeBlock() {
     // Print the block onto the screen, but not the board
     // It's a 4x4 array
     for (int i = 0; i < 4; i++) {
-      byte line = (block >> ((3-i) * 4)) & 0x0F;
+      line = (block >> ((3-i) * 4)) & 0x0F;
       // Now shift the piece into the place it belongs
       if (block_y < 0) {
         // Negative bitshifts aren't a thing
@@ -97,40 +134,22 @@ void badgeBlock() {
       }
       // Don't allow the pieces to move off the side of the screen
       if (line == 0) continue;
+      
       if (block_x+i < 0) block_x++;
-      if (block_x+i > 7) block_x--;
-
-      // Check if the piece is hitting anything
-      if (line & 0x80 || (line << 1) & screen[block_x+i]) {
-        // We have an overlap
-        place = true;
+      else if (block_x+i > 7) block_x--;
+      else if (NEW_BUTTON(BTN_LEFT)) {
+        //If we push left, and aren't already at the leftmost column check the line to the left
+        if (line & frameBuffer[block_x+i])
+          block_x++;
+      } else if (NEW_BUTTON(BTN_RIGHT)) {
+        if (line & frameBuffer[block_x+i])
+          block_x--;
       }
+
+      // Write the piece into the frame buffer
       frameBuffer[block_x+i] = frameBuffer[block_x+i] | line;
     }
 
-    // Time for a new piece
-    if (place) {
-      // The piece hit above the screen, it's game over
-      if (block_y == -2) {
-        printScore(0);
-        return;
-      }
-      // Basically the same loop as above, but this time, writ the piece into the board
-      for (int i = 0; i < 4; i++) {
-        byte line = (block >> ((3-i) * 4)) & 0x0F;
-        if (block_y < 0) {
-          line = line >> block_y * -1;
-        } else {
-          line = line << block_y;
-        }
-        screen[block_x+i] = screen[block_x+i] | line;
-      }
-      // Get the next piece
-      block_x = 3;
-      block_y = -4;
-      place = false;
-      block = blocks[RANDOM(7)];
-    }
 
     // Do we have a copmlete line? delete it
     byte row_mask = 0x00;
@@ -166,7 +185,6 @@ void badgeBlock() {
           // Recombine the lines
           screen[j] = to_save | to_shift;
         }
-        // Pretty sure we should decreemnt i here, but it needs testing
       }
     }
   }
