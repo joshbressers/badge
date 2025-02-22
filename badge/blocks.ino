@@ -67,7 +67,7 @@ void badgeBlock() {
           goto out; // Only bad people use goto
         }
       }
-      block_y++;
+      //block_y++;
       // Don't increment y if we have to place
     }
 out:
@@ -85,6 +85,7 @@ out:
         new_block = (new_block << 1) | ((block & (0x0001 << (i + 12))) ? 0x0001 : 0x0000);
       }
       block = new_block;
+      block_x--;
     } else if (NEW_BUTTON(BTN_B)) {
       short new_block = 0x0000;
       // Rotate
@@ -99,6 +100,7 @@ out:
         new_block = (new_block << 1) | ((block & (0x0001 << i)) ? 0x0001 : 0x0000);
       }
       block = new_block;
+      block_x++;
     }
 
     if (NEW_BUTTON(BTN_LEFT)) {
@@ -110,11 +112,11 @@ out:
     // Remove this after testing is done
     // Or not, whatever
     if (NEW_BUTTON(BTN_DOWN)) {
-      //block_y++;
+      block_y++;
       down = true;
-    } //else if (NEW_BUTTON(BTN_UP)) {
-      //block_y--;
-    //}
+    } else if (NEW_BUTTON(BTN_UP)) {
+      block_y--;
+    }
 
     // Print the screen
     for (int i = 0; i < 8; i++) {

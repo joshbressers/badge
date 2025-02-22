@@ -32,7 +32,7 @@ void runTick() {
  */
 void shiftRegisters() {
       digitalWrite(latchPin, HIGH);
-      uint8_t currentRow = 1; // A bit vector for the LED row
+      uint8_t currentRow = 0x80; // A bit vector for the LED row
       OLD_BUTTON = CUR_BUTTON;
 
       // Loop for each row
@@ -45,11 +45,11 @@ void shiftRegisters() {
 
           // In this code we have to extract the relevant bits to shift into 
           // the register
-          digitalWrite(dataPin1, !!(currentRow & (1 << (i))));
+          digitalWrite(dataPin2, !!(currentRow & (1 << (i))));
 
           // We write the data in backwards to scroll left
           // (remove the 7 - to scroll right, but that would be weird)
-          digitalWrite(dataPin2, !(frameBuffer[j] & (1 << (7 - i))));
+          digitalWrite(dataPin1, !(frameBuffer[j] & (1 << (7 - i))));
 
           // Shift in the button presses
           CUR_BUTTON = CUR_BUTTON << 1;
@@ -62,7 +62,7 @@ void shiftRegisters() {
           
         }
         // Shift the row bit
-        currentRow = currentRow << 1;
+        currentRow = currentRow >> 1;
         digitalWrite(latchPin, HIGH);
         digitalWrite(latchPin, LOW);
       }  
