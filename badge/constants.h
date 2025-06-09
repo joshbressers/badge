@@ -31,6 +31,8 @@ unsigned int messageLen = 0;
 const char scoreMessage[] PROGMEM = "Score ";
 unsigned char scoreString[10];
 
+const char codez[] PROGMEM = "sekrit codez!!! ";
+
 
 // Constants used when writing the message to the framebuffer
 unsigned long messageCount = 0;
@@ -90,6 +92,7 @@ void printMessage(unsigned char *newMessage, bool memMessage);
 void printScore(unsigned int score);
 void shiftRegisters();
 void showMessage();
+void teh_code();
 void clearFrameBuffer();
 void moveDot();
 void showMenu();
@@ -98,5 +101,6 @@ void buttonTest();
 void runTick();
 void pongGame();
 void spaceGame();
+void badgeBlock();
 
 #endif
