@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "fb304cb5-e075-4dbe-8b88-b6089029a82d")
 	(paper "A4")
 	(title_block
@@ -89,24 +89,6 @@
 			)
 			(symbol "4021_1_1"
 				(pin input line
-					(at -10.16 -15.24 0)
-					(length 2.54)
-					(name "D7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
 					(at -10.16 15.24 0)
 					(length 2.54)
 					(name "CP"
@@ -117,6 +99,24 @@
 						)
 					)
 					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 10.16 0)
+					(length 2.54)
+					(name "PL"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -142,17 +142,71 @@
 						)
 					)
 				)
-				(pin output line
-					(at 10.16 12.7 180)
+				(pin input line
+					(at -10.16 2.54 0)
 					(length 2.54)
-					(name "Q6"
+					(name "D0"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "12"
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "D1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -2.54 0)
+					(length 2.54)
+					(name "D2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -5.08 0)
+					(length 2.54)
+					(name "D3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -214,6 +268,24 @@
 						)
 					)
 				)
+				(pin input line
+					(at -10.16 -15.24 0)
+					(length 2.54)
+					(name "D7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin power_in line
 					(at 0 20.32 270)
 					(length 2.54)
@@ -225,6 +297,24 @@
 						)
 					)
 					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -20.32 90)
+					(length 2.54)
+					(name "VSS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -251,6 +341,24 @@
 					)
 				)
 				(pin output line
+					(at 10.16 12.7 180)
+					(length 2.54)
+					(name "Q6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
 					(at 10.16 10.16 180)
 					(length 2.54)
 					(name "Q7"
@@ -268,115 +376,8 @@
 						)
 					)
 				)
-				(pin input line
-					(at -10.16 -5.08 0)
-					(length 2.54)
-					(name "D3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 -2.54 0)
-					(length 2.54)
-					(name "D2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 0 0)
-					(length 2.54)
-					(name "D1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 2.54 0)
-					(length 2.54)
-					(name "D0"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -20.32 90)
-					(length 2.54)
-					(name "VSS"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 10.16 0)
-					(length 2.54)
-					(name "PL"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "74xx:74HC595"
 			(exclude_from_sim no)
@@ -444,35 +445,17 @@
 				)
 			)
 			(symbol "74HC595_1_0"
-				(pin tri_state line
-					(at 10.16 7.62 180)
-					(length 2.54)
-					(name "QB"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin input line
-					(at -10.16 2.54 0)
+					(at -10.16 10.16 0)
 					(length 2.54)
-					(name "~{SRCLR}"
+					(name "SER"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "10"
+					(number "14"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -491,6 +474,24 @@
 						)
 					)
 					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 2.54 0)
+					(length 2.54)
+					(name "~{SRCLR}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -534,17 +535,35 @@
 						)
 					)
 				)
-				(pin input line
-					(at -10.16 10.16 0)
+				(pin power_in line
+					(at 0 15.24 270)
 					(length 2.54)
-					(name "SER"
+					(name "VCC"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "14"
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -17.78 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -570,17 +589,17 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 0 15.24 270)
+				(pin tri_state line
+					(at 10.16 7.62 180)
 					(length 2.54)
-					(name "VCC"
+					(name "QB"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "16"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -696,24 +715,6 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 0 -17.78 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin output line
 					(at 10.16 -12.7 180)
 					(length 2.54)
@@ -746,11 +747,16 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Connector:TestPoint"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0.762) hide)
+				(offset 0.762)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -848,11 +854,16 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:LED"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -920,10 +931,22 @@
 			(symbol "LED_0_1"
 				(polyline
 					(pts
-						(xy -1.27 -1.27) (xy -1.27 1.27)
+						(xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524)
 					)
 					(stroke
-						(width 0.254)
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524)
+					)
+					(stroke
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -944,7 +967,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
+						(xy -1.27 -1.27) (xy -1.27 1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -956,22 +979,10 @@
 				)
 				(polyline
 					(pts
-						(xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524)
+						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
 					)
 					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524)
-					)
-					(stroke
-						(width 0)
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -1017,9 +1028,12 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:R"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0)
 			)
@@ -1138,6 +1152,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "MCU_Microchip_ATtiny:ATtiny85-20P"
 			(exclude_from_sim no)
@@ -1221,53 +1236,17 @@
 				)
 			)
 			(symbol "ATtiny85-20P_1_1"
-				(pin bidirectional line
-					(at 15.24 -5.08 180)
+				(pin power_in line
+					(at 0 15.24 270)
 					(length 2.54)
-					(name "~{RESET}/PB5"
+					(name "VCC"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at 15.24 0 180)
-					(length 2.54)
-					(name "XTAL1/PB3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at 15.24 -2.54 180)
-					(length 2.54)
-					(name "XTAL2/PB4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1347,17 +1326,53 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 0 15.24 270)
+				(pin bidirectional line
+					(at 15.24 0 180)
 					(length 2.54)
-					(name "VCC"
+					(name "XTAL1/PB3"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "8"
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 15.24 -2.54 180)
+					(length 2.54)
+					(name "XTAL2/PB4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 15.24 -5.08 180)
+					(length 2.54)
+					(name "~{RESET}/PB5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1366,34 +1381,34 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "dk_Battery-Holders-Clips-Contacts:BS-7"
-			(pin_numbers hide)
 			(pin_names
 				(offset 1.016)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "BAT"
-				(at -1.27 3.81 0)
+			(property "Reference" "BAT1"
+				(at 3.81 1.651 0)
 				(effects
 					(font
 						(size 1.524 1.524)
 					)
-					(justify right)
+					(justify left)
 				)
 			)
 			(property "Value" "BS-7"
-				(at -1.27 -3.81 0)
+				(at 3.81 -0.889 0)
 				(effects
 					(font
 						(size 1.524 1.524)
 					)
-					(justify right)
+					(justify left)
 				)
 			)
-			(property "Footprint" "digikey-footprints:Battery_Holder_Coin_2032_BS-7"
+			(property "Footprint" "Battery:BatteryHolder_MPD_BC2003_1x2032"
 				(at 5.08 5.08 0)
 				(effects
 					(font
@@ -1515,18 +1530,6 @@
 			(symbol "BS-7_1_1"
 				(polyline
 					(pts
-						(xy 0 -2.54) (xy 0 -1.905)
-					)
-					(stroke
-						(width 0)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 0 1.905) (xy 0 2.54)
 					)
 					(stroke
@@ -1539,19 +1542,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 -1.905) (xy -1.27 -1.905)
-					)
-					(stroke
-						(width 0)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 0.635) (xy -1.27 0.635)
+						(xy 0 -2.54) (xy 0 -1.905)
 					)
 					(stroke
 						(width 0)
@@ -1575,7 +1566,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.778 2.794) (xy 0.762 2.794)
+						(xy 1.27 0.635) (xy -1.27 0.635)
 					)
 					(stroke
 						(width 0)
@@ -1587,7 +1578,19 @@
 				)
 				(polyline
 					(pts
-						(xy 2.54 -0.635) (xy -2.54 -0.635)
+						(xy 1.27 -1.905) (xy -1.27 -1.905)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.778 2.794) (xy 0.762 2.794)
 					)
 					(stroke
 						(width 0)
@@ -1609,22 +1612,16 @@
 						(type none)
 					)
 				)
-				(pin power_out line
-					(at 0 -5.08 90)
-					(length 2.54)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
+				(polyline
+					(pts
+						(xy 2.54 -0.635) (xy -2.54 -0.635)
 					)
-					(number "Neg"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
 					)
 				)
 				(pin power_out line
@@ -1637,7 +1634,25 @@
 							)
 						)
 					)
-					(number "Pos"
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 0 -5.08 90)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1646,6 +1661,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "dk_Tactile-Switches:TL3315NF160Q"
 			(pin_names
@@ -1790,32 +1806,9 @@
 				)
 			)
 			(symbol "TL3315NF160Q_0_1"
-				(circle
-					(center -1.524 0)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
 				(polyline
 					(pts
 						(xy -2.54 2.54) (xy -2.54 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.778 0) (xy -2.54 0)
 					)
 					(stroke
 						(width 0)
@@ -1839,8 +1832,30 @@
 				)
 				(polyline
 					(pts
-						(xy 2.54 -2.54) (xy 2.54 2.54)
+						(xy -1.778 0) (xy -2.54 0)
 					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center -1.524 0)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 1.524 0)
+					(radius 0.254)
 					(stroke
 						(width 0)
 						(type solid)
@@ -1861,9 +1876,10 @@
 						(type none)
 					)
 				)
-				(circle
-					(center 1.524 0)
-					(radius 0.254)
+				(polyline
+					(pts
+						(xy 2.54 -2.54) (xy 2.54 2.54)
+					)
 					(stroke
 						(width 0)
 						(type solid)
@@ -1971,6 +1987,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:GND"
 			(power)
@@ -2050,7 +2067,8 @@
 			(symbol "GND_1_1"
 				(pin power_in line
 					(at 0 0 270)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -2067,6 +2085,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:VCC"
 			(power)
@@ -2144,7 +2163,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0 2.54) (xy 0.762 1.27)
 					)
 					(stroke
 						(width 0)
@@ -2156,7 +2175,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -2170,7 +2189,8 @@
 			(symbol "VCC_1_1"
 				(pin power_in line
 					(at 0 0 90)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "VCC"
 						(effects
 							(font
@@ -2187,6 +2207,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(junction
@@ -7178,7 +7199,7 @@
 				)
 			)
 		)
-		(property "Value" "TL3315NF160Q"
+		(property "Value" "C83206"
 			(at 57.15 116.84 0)
 			(effects
 				(font
@@ -7186,7 +7207,7 @@
 				)
 			)
 		)
-		(property "Footprint" "badge-footprints:button"
+		(property "Footprint" "Badge-Library:C83206"
 			(at 62.23 116.84 0)
 			(effects
 				(font
@@ -7196,7 +7217,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://spec_sheets.e-switch.com/specs/P010337.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8588893584246784000"
 			(at 62.23 114.3 0)
 			(effects
 				(font
@@ -7552,7 +7573,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 191.77 108.458 90)
 			(effects
 				(font
@@ -8245,7 +8266,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 79.502 175.26 90)
 			(effects
 				(font
@@ -8313,7 +8334,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 191.77 116.078 90)
 			(effects
 				(font
@@ -9477,7 +9498,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 191.77 110.998 90)
 			(effects
 				(font
@@ -9537,7 +9558,7 @@
 				)
 			)
 		)
-		(property "Value" "TL3315NF160Q"
+		(property "Value" "C83206"
 			(at 57.15 104.14 0)
 			(effects
 				(font
@@ -9545,7 +9566,7 @@
 				)
 			)
 		)
-		(property "Footprint" "badge-footprints:button"
+		(property "Footprint" "Badge-Library:C83206"
 			(at 62.23 104.14 0)
 			(effects
 				(font
@@ -9555,7 +9576,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://spec_sheets.e-switch.com/specs/P010337.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8588893584246784000"
 			(at 62.23 101.6 0)
 			(effects
 				(font
@@ -9774,7 +9795,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 84.582 175.26 90)
 			(effects
 				(font
@@ -10039,7 +10060,7 @@
 				)
 			)
 		)
-		(property "Value" "TL3315NF160Q"
+		(property "Value" "C83206"
 			(at 55.88 91.44 0)
 			(effects
 				(font
@@ -10047,7 +10068,7 @@
 				)
 			)
 		)
-		(property "Footprint" "badge-footprints:button"
+		(property "Footprint" "Badge-Library:C83206"
 			(at 60.96 91.44 0)
 			(effects
 				(font
@@ -10057,7 +10078,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://spec_sheets.e-switch.com/specs/P010337.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8588893584246784000"
 			(at 60.96 88.9 0)
 			(effects
 				(font
@@ -10206,7 +10227,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 71.882 175.26 90)
 			(effects
 				(font
@@ -10411,7 +10432,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 66.802 175.26 90)
 			(effects
 				(font
@@ -10611,7 +10632,7 @@
 				)
 			)
 		)
-		(property "Value" "TL3315NF160Q"
+		(property "Value" "C83206"
 			(at 57.15 140.97 0)
 			(effects
 				(font
@@ -10619,7 +10640,7 @@
 				)
 			)
 		)
-		(property "Footprint" "badge-footprints:button"
+		(property "Footprint" "Badge-Library:C83206"
 			(at 62.23 140.97 0)
 			(effects
 				(font
@@ -10629,7 +10650,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://spec_sheets.e-switch.com/specs/P010337.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8588893584246784000"
 			(at 62.23 138.43 0)
 			(effects
 				(font
@@ -10778,7 +10799,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 74.422 175.26 90)
 			(effects
 				(font
@@ -10986,7 +11007,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 191.77 121.158 90)
 			(effects
 				(font
@@ -11261,7 +11282,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 191.77 126.238 90)
 			(effects
 				(font
@@ -11595,7 +11616,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "BS-7"
+		(property "Value" "CR2032"
 			(at 34.29 167.259 0)
 			(effects
 				(font
@@ -11604,7 +11625,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "digikey-footprints:Battery_Holder_Coin_2032_BS-7"
+		(property "Footprint" "Battery:BatteryHolder_MPD_BC2003_1x2032"
 			(at 35.56 161.29 0)
 			(effects
 				(font
@@ -11614,7 +11635,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://www.memoryprotectiondevices.com/datasheets/BS-7-datasheet.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8588916401508143104"
 			(at 35.56 158.75 90)
 			(effects
 				(font
@@ -11624,13 +11645,22 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "BATTERY HOLDER COIN 20MM PC PIN"
+		(property "Description" "Battery Clip CR2032 SMD Button And Strip Battery Connector ROHS"
 			(at 35.56 140.97 0)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C70373"
+			(at 30.48 166.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 				(hide yes)
 			)
 		)
@@ -11714,10 +11744,10 @@
 				(hide yes)
 			)
 		)
-		(pin "Neg"
+		(pin "2"
 			(uuid "cf44d9c2-a71b-4e94-990b-aa994ff3c3e7")
 		)
-		(pin "Pos"
+		(pin "1"
 			(uuid "c58ff772-4c68-4d1d-a344-808d43778011")
 		)
 		(instances
@@ -11962,7 +11992,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 191.77 123.698 90)
 			(effects
 				(font
@@ -12156,7 +12186,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4021"
+		(property "Value" "CD4021B"
 			(at 116.4941 130.81 0)
 			(effects
 				(font
@@ -12165,7 +12195,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-16_W7.62mm"
+		(property "Footprint" "PCM_JLCPCB:SOIC-16_L9.9-W3.9-P1.27-LS6.0-BL"
 			(at 114.3 147.32 0)
 			(effects
 				(font
@@ -12174,7 +12204,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/HEF4021B.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8586187630702964736"
 			(at 114.3 147.32 0)
 			(effects
 				(font
@@ -12183,7 +12213,16 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "4021 Shift Register"
+			(at 114.3 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C6729"
 			(at 114.3 151.13 0)
 			(effects
 				(font
@@ -12268,7 +12307,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "74HC595"
+		(property "Value" "SN74HC595"
 			(at 169.8341 53.34 0)
 			(effects
 				(font
@@ -12277,7 +12316,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-16_W7.62mm"
+		(property "Footprint" "PCM_JLCPCB:SOIC-16_L9.9-W3.9-P1.27-LS6.0-BL"
 			(at 167.64 68.58 0)
 			(effects
 				(font
@@ -12296,6 +12335,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 167.64 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C5947"
 			(at 167.64 68.58 0)
 			(effects
 				(font
@@ -12529,7 +12577,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 69.342 175.26 90)
 			(effects
 				(font
@@ -12800,7 +12848,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "ATtiny85-20P"
+		(property "Value" "ATtiny85-20SF"
 			(at 99.06 82.55 0)
 			(effects
 				(font
@@ -12809,7 +12857,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-8_W7.62mm"
+		(property "Footprint" "Package_SO:SOIC-8_5.3x5.3mm_P1.27mm"
 			(at 113.03 81.28 0)
 			(effects
 				(font
@@ -12829,6 +12877,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 113.03 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C615549"
 			(at 113.03 81.28 0)
 			(effects
 				(font
@@ -13095,7 +13152,7 @@
 				)
 			)
 		)
-		(property "Value" "TL3315NF160Q"
+		(property "Value" "C83206"
 			(at 57.15 129.54 0)
 			(effects
 				(font
@@ -13103,7 +13160,7 @@
 				)
 			)
 		)
-		(property "Footprint" "badge-footprints:button"
+		(property "Footprint" "Badge-Library:C83206"
 			(at 62.23 129.54 0)
 			(effects
 				(font
@@ -13113,7 +13170,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://spec_sheets.e-switch.com/specs/P010337.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8588893584246784000"
 			(at 62.23 127 0)
 			(effects
 				(font
@@ -13669,7 +13726,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "74HC595"
+		(property "Value" "SN74HC595"
 			(at 177.4541 101.6 0)
 			(effects
 				(font
@@ -13678,7 +13735,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_DIP:DIP-16_W7.62mm"
+		(property "Footprint" "PCM_JLCPCB:SOIC-16_L9.9-W3.9-P1.27-LS6.0-BL"
 			(at 175.26 116.84 0)
 			(effects
 				(font
@@ -13697,6 +13754,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 175.26 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB Part #" "C5947"
 			(at 175.26 116.84 0)
 			(effects
 				(font
@@ -14272,7 +14338,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 76.962 175.26 90)
 			(effects
 				(font
@@ -14342,7 +14408,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 82.042 175.26 90)
 			(effects
 				(font
@@ -14410,7 +14476,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 191.77 113.538 90)
 			(effects
 				(font
@@ -14478,7 +14544,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder"
+		(property "Footprint" "PCM_JLCPCB:R_0805"
 			(at 191.77 118.618 90)
 			(effects
 				(font
@@ -15028,7 +15094,7 @@
 				)
 			)
 		)
-		(property "Value" "TL3315NF160Q"
+		(property "Value" "C83206"
 			(at 55.88 78.74 0)
 			(effects
 				(font
@@ -15036,7 +15102,7 @@
 				)
 			)
 		)
-		(property "Footprint" "badge-footprints:button"
+		(property "Footprint" "Button_Switch_SMD:SW_MEC_5GSH9"
 			(at 60.96 78.74 0)
 			(effects
 				(font
@@ -15046,7 +15112,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://spec_sheets.e-switch.com/specs/P010337.pdf"
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8588893584246784000"
 			(at 60.96 76.2 0)
 			(effects
 				(font
@@ -15058,86 +15124,6 @@
 		)
 		(property "Description" "SWITCH TACTILE SPST-NO 0.05A 15V"
 			(at 60.96 58.42 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Digi-Key_PN" "EG4621CT-ND"
-			(at 60.96 73.66 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "MPN" "TL3315NF160Q"
-			(at 60.96 71.12 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Category" "Switches"
-			(at 60.96 68.58 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Family" "Tactile Switches"
-			(at 60.96 66.04 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "DK_Datasheet_Link" "http://spec_sheets.e-switch.com/specs/P010337.pdf"
-			(at 60.96 63.5 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "DK_Detail_Page" "/product-detail/en/e-switch/TL3315NF160Q/EG4621CT-ND/1870401"
-			(at 60.96 60.96 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer" "E-Switch"
-			(at 60.96 55.88 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Status" "Active"
-			(at 60.96 53.34 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -15308,4 +15294,5 @@
 			(page "1")
 		)
 	)
+	(embedded_fonts no)
 )
