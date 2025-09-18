@@ -32,7 +32,6 @@ badgeStruct thePrograms[] = {
     menu6,
     (*badgeBlock)
   },
-  /*
   {
     menu2,
     (*moveDot)
@@ -54,7 +53,6 @@ badgeStruct thePrograms[] = {
     menu3,
     (*screenTest)
   }
-  */
 };
 
 void showMenu() {
