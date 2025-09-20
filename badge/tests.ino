@@ -24,7 +24,7 @@ void screenTest() {
   while (true) {
     LOOP(0);
 
-    if (TICK(100)) {
+    if (TICK(200)) {
       if (!pattern) pattern = 0xFF;
       else pattern = pattern << 1;
     }
