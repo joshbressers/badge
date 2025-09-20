@@ -1,6 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include <avr/io.h>
 #include "font.h"
 
 // Constants
@@ -8,13 +9,13 @@
 // Hardware related constants
 
 // Shift register pins
-#define latchPin 1
-#define clockPin 2
+#define latchPin PB1
+#define clockPin PB2
 
 ////Pin connected to DS of 74HC595
-#define dataPin1 0 // SR 1
-#define dataPin2 3 // SR 2
-#define buttonPin 4 // Button Input
+#define dataPin1 PB0 // SR 1
+#define dataPin2 PB3 // SR 2
+#define buttonPin PB4 // Button Input
 
 // Frame buffer variables
 byte currentRow = 0;
@@ -34,7 +35,7 @@ unsigned char scoreString[10];
 
 // Constants used when writing the message to the framebuffer
 unsigned long messageCount = 0;
-#define messageDelay 30
+#define messageDelay 60
 unsigned long lastButton = 0;
 
 // Tick constants

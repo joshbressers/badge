@@ -4,11 +4,18 @@
 
 void setup() {
 //set pins to output so you can control the shift register
-pinMode(latchPin, OUTPUT);
-pinMode(clockPin, OUTPUT);
-pinMode(dataPin1, OUTPUT);
-pinMode(dataPin2, OUTPUT);
-pinMode(buttonPin, INPUT);
+
+DDRB |= (1 << latchPin);			// output
+DDRB |= (1 << clockPin);  			
+DDRB |= (1 << dataPin1);
+DDRB |= (1 << dataPin2);
+DDRB &= ~(1 << buttonPin); // input
+
+//pinMode(latchPin, OUTPUT);
+//pinMode(clockPin, OUTPUT);
+//pinMode(dataPin1, OUTPUT);
+//pinMode(dataPin2, OUTPUT);
+//pinMode(buttonPin, INPUT);
 setMessage(defaultMessage);
 }
 
