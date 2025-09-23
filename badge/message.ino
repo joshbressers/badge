@@ -159,6 +159,7 @@ void clearFrameBuffer() {
   messageCount = 0;
 }
 
+// Set one point on the framebuffer
 void setFrameBuffer(uint8_t x, uint8_t y) {
   if (x < 8 && y < 8 && x >= 0 && y >= 0)
     frameBuffer[x] |= 1 << y;

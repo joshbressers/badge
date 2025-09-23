@@ -28,7 +28,8 @@ void moveDot() {
     x = x + x_vel;
     y = y + y_vel;
 
-    frameBuffer[x/32] = 1 << (y/32);
+    //frameBuffer[x/32] = 1 << (y/32);
+    setFrameBuffer(x/32, y/32);
   }
 }
 
@@ -142,11 +143,11 @@ void pongGame() {
     }
 
     // Draw the ball
-    frameBuffer[(int)ball_x] = 1 << (int)ball_y;
+    setFrameBuffer((int)ball_x, (int)ball_y);
 
     // Draw the paddle
     for (int i = 0; i < 3; i++) {
-      frameBuffer[(int)paddle_x + i] = frameBuffer[(int)paddle_x + i] | 0x80;
+      setFrameBuffer((int)paddle_x+i, 7);
     }
   }
 }
@@ -182,8 +183,8 @@ void spaceGame() {
       printScore(score);
       return;
     }else {
-      frameBuffer[(int)alien_x] = frameBuffer[(int)alien_x] | 0x01 << (int)alien_y;
-      frameBuffer[(int)alien_x + 1] = frameBuffer[(int)alien_x + 1] | 0x01 << (int)alien_y;
+      setFrameBuffer((int)alien_x, (int)alien_y);
+      setFrameBuffer((int)alien_x + 1, (int)alien_y);
       alien_y = alien_y + 0.005 + score * 0.001;
     }
 
@@ -200,7 +201,7 @@ void spaceGame() {
     }
 
     if (bullet_y > 0) {
-      frameBuffer[int(bullet_x)] = frameBuffer[(int)bullet_x] | 0x20 >> (6 - (int)bullet_y);
+      setFrameBuffer((int)bullet_x, (int)bullet_y);
 
       if ((int(bullet_y) == (int)alien_y) && ((int)bullet_x >= (int)alien_x && (int)bullet_x <= ((int)alien_x + 1))) {
         alien_y = -10;
@@ -214,9 +215,13 @@ void spaceGame() {
 
     // Draw the ship
     if (ship_x > 0)
-      frameBuffer[(int)ship_x - 1] = frameBuffer[(int)ship_x - 1] | 0x80;
-    frameBuffer[(int)ship_x] = frameBuffer[(int)ship_x] | 0xC0;
+      //frameBuffer[(int)ship_x - 1] = frameBuffer[(int)ship_x - 1] | 0x80;
+      setFrameBuffer((int)ship_x - 1, 7);
+    //frameBuffer[(int)ship_x] = frameBuffer[(int)ship_x] | 0xC0;
+    setFrameBuffer((int)ship_x, 6);
+    setFrameBuffer((int)ship_x, 7);
     if (ship_x <= 6)
-      frameBuffer[(int)ship_x + 1] = frameBuffer[(int)ship_x + 1] | 0x80;
+      //frameBuffer[(int)ship_x + 1] = frameBuffer[(int)ship_x + 1] | 0x80;
+      setFrameBuffer((int)ship_x + 1, 7);
   }
 }

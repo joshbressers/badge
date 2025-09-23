@@ -28,22 +28,31 @@ badgeStruct thePrograms[] = {
     menu0,
     NULL
   },
+#ifdef RainGame
   {
     menu6,
     (*showRain)
   },
+#endif
+#ifdef DotGame
   {
     menu2,
     (*moveDot)
   },
+#endif
+#ifdef PongGame
   {
     menu4,
     (*pongGame)
   },
+#endif
+#ifdef SpaceGame
   {
     menu5,
     (*spaceGame)
   },
+#endif
+#ifdef EnableTests
   {
     menu1,
     (*buttonTest)
@@ -53,6 +62,7 @@ badgeStruct thePrograms[] = {
     menu3,
     (*screenTest)
   }
+#endif
   
 };
 

@@ -2,9 +2,19 @@
 
 #include "constants.h"
 
+// The RNG state
+uint32_t rngState = 0;
+
 /* The state must be initialized to non-zero */
 uint32_t random32()
 {
+
+  // The state can't be zero ever, we set it the first time
+  if (rngState == 0) {
+    rngState = currentTick;
+    if (rngState == 0) rngState = 7;
+  }
+  
   /* Algorithm "xor" from p. 4 of Marsaglia, "Xorshift RNGs" */
   uint32_t x = rngState;
   x ^= x << 13;

@@ -4,6 +4,14 @@
 #include <avr/io.h>
 #include "font.h"
 
+// Game Definitions
+//#define DotGame
+//#define PongGame
+//#define SpaceGame
+//#define RainGame
+#define EnableTests
+
+
 // Constants
 
 // Hardware related constants
@@ -46,9 +54,6 @@ unsigned long currentTick = 0;
 // State booleans
 bool donePrinting = false;
 
-// The RNG state
-uint32_t rngState = 0;
-
 // TICK can be used for delay loops. Pass it in a value to return true
 // after a certain amount of time has passed.
 #define TICK(the_tick) (!(currentTick % the_tick))
@@ -63,8 +68,7 @@ uint32_t rngState = 0;
   }\
 }
 
-// This is random enough for us. The Arduino random() code
-// uses up 500 bytes
+// The Arduino random() code uses up 500 bytes, we'll use our own
 #define RANDOM(rand_ceiling) (random32() % rand_ceiling)
 
 // Button Constants
