@@ -8,7 +8,7 @@
 //#define DotGame
 //#define PongGame
 //#define SpaceGame
-//#define RainGame
+#define RainGame
 #define EnableTests
 
 
