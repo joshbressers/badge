@@ -62,7 +62,7 @@ bool donePrinting = false;
 
 // This is random enough for us. The Arduino random() code
 // uses up 500 bytes
-#define RANDOM(rand_ceiling) (currentTick % rand_ceiling)
+#define RANDOM(rand_ceiling) (currentTick++ % rand_ceiling)
 
 // Button Constants
 #define BTN_A 0x10

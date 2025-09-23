@@ -32,6 +32,47 @@ void moveDot() {
   }
 }
 
+void showRain() {
+  uint8_t x = 4;
+  uint8_t y = 3;
+  uint8_t loopCount = 0;
+
+  while(true) {
+
+    clearFrameBuffer();
+
+    if (loopCount == 0)
+      setFrameBuffer(x, y);
+    else {
+        setFrameBuffer(x+loopCount, y);
+        setFrameBuffer(x-loopCount, y);
+        setFrameBuffer(x, y+loopCount);
+        setFrameBuffer(x, y-loopCount);
+        for (int i = 0; i < loopCount; i++) {
+          setFrameBuffer(x+loopCount, y+i);
+          setFrameBuffer(x+loopCount, y-i);
+          setFrameBuffer(x-loopCount, y+i);
+          setFrameBuffer(x-loopCount, y-i);
+          setFrameBuffer(x+i, y+loopCount);
+          setFrameBuffer(x-i, y+loopCount);
+          setFrameBuffer(x+i, y-loopCount);
+          setFrameBuffer(x-i, y-loopCount);
+        }
+    }
+
+    loopCount++;
+    if (loopCount > 9) {
+      loopCount = 0;
+      x = RANDOM(8);
+      y = RANDOM(8);
+    }
+
+    for (int i = 0; i < 100 + x; i++) {
+      LOOP(0);
+    }
+  }
+}
+
 void pongGame() {
   float ball_x = 3;
   float ball_y = 2;
