@@ -149,14 +149,9 @@ void spaceGame() {
     }
 
     // Draw the ship
-    if (ship_x > 0)
-      //frameBuffer[(int)ship_x - 1] = frameBuffer[(int)ship_x - 1] | 0x80;
-      setFrameBuffer((int)ship_x - 1, 7);
-    //frameBuffer[(int)ship_x] = frameBuffer[(int)ship_x] | 0xC0;
+    setFrameBuffer((int)ship_x - 1, 7);
     setFrameBuffer((int)ship_x, 6);
     setFrameBuffer((int)ship_x, 7);
-    if (ship_x <= 6)
-      //frameBuffer[(int)ship_x + 1] = frameBuffer[(int)ship_x + 1] | 0x80;
-      setFrameBuffer((int)ship_x + 1, 7);
+    setFrameBuffer((int)ship_x + 1, 7);
   }
 }
