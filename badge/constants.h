@@ -4,12 +4,27 @@
 #include <avr/io.h>
 #include "font.h"
 
-// Game Definitions
+// Things you might want to change are all located here
+
+// Games to enable
 //#define DotGame
 //#define PongGame
 //#define SpaceGame
-#define RainGame
+//#define RainGame
 #define EnableTests
+
+// This is the default message that scrolls across the badge by default
+const char defaultMessage[] PROGMEM = "Default Badge Message ";
+
+// The speed at which the message scrolls. Bigger numbers scroll slower
+#define messageDelay 60
+
+// How many ticks should we wait until we return to home screen
+// Bigger numbers wait longer
+#define HOME_TIMEOUT 2000
+
+
+// Below here are things you probably shouldn't change
 
 
 // Constants
@@ -29,11 +44,7 @@
 byte currentRow = 0;
 byte frameBuffer[] = {0,0,0,0,0,0,0,0};
 
-// How many ticks should we wait until we return to home screen
-#define HOME_TIMEOUT 2000
-
 // Message display constants
-const char defaultMessage[] PROGMEM = "Default Badge Message ";
 const char* message;
 unsigned int messageLen = 0;
 
@@ -43,7 +54,6 @@ unsigned char scoreString[10];
 
 // Constants used when writing the message to the framebuffer
 unsigned long messageCount = 0;
-#define messageDelay 60
 unsigned long lastButton = 0;
 
 // Tick constants
