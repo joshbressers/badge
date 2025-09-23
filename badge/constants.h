@@ -46,6 +46,9 @@ unsigned long currentTick = 0;
 // State booleans
 bool donePrinting = false;
 
+// The RNG state
+uint32_t rngState = 0;
+
 // TICK can be used for delay loops. Pass it in a value to return true
 // after a certain amount of time has passed.
 #define TICK(the_tick) (!(currentTick % the_tick))
@@ -62,7 +65,7 @@ bool donePrinting = false;
 
 // This is random enough for us. The Arduino random() code
 // uses up 500 bytes
-#define RANDOM(rand_ceiling) (currentTick++ % rand_ceiling)
+#define RANDOM(rand_ceiling) (random32() % rand_ceiling)
 
 // Button Constants
 #define BTN_A 0x10
@@ -99,5 +102,6 @@ void buttonTest();
 void runTick();
 void pongGame();
 void spaceGame();
+uint32_t random32();
 
 #endif

@@ -2,6 +2,17 @@
 
 #include "constants.h"
 
+/* The state must be initialized to non-zero */
+uint32_t random32()
+{
+  /* Algorithm "xor" from p. 4 of Marsaglia, "Xorshift RNGs" */
+  uint32_t x = rngState;
+  x ^= x << 13;
+  x ^= x >> 17;
+  x ^= x << 5;
+  return rngState = x;
+}
+
 void runTick() {
   
   // We count the number of loops instead of using millis()
