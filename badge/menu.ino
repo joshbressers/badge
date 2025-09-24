@@ -9,71 +9,13 @@
 
 #include "constants.h"
 
-// Menu static text
-const char menu0[] PROGMEM = "Menu ";
-const char menu1[] PROGMEM = "Test Buttons ";
-const char menu2[] PROGMEM = "Dot ";
-const char menu3[] PROGMEM = "Test Screen ";
-const char menu4[] PROGMEM = "Pong ";
-const char menu5[] PROGMEM = "Space ";
-const char menu6[] PROGMEM = "Rain";
-
-typedef struct badgeStruct {
-  const char *programName;
-  void (*badgeFunction)(void);
-};
-
-badgeStruct thePrograms[] = {
-  {
-    menu0,
-    NULL
-  },
-#ifdef RainGame
-  {
-    menu6,
-    (*showRain)
-  },
-#endif
-#ifdef DotGame
-  {
-    menu2,
-    (*moveDot)
-  },
-#endif
-#ifdef PongGame
-  {
-    menu4,
-    (*pongGame)
-  },
-#endif
-#ifdef SpaceGame
-  {
-    menu5,
-    (*spaceGame)
-  },
-#endif
-#ifdef EnableTests
-  {
-    menu1,
-    (*buttonTest)
-  },
-
-  {
-    menu3,
-    (*screenTest)
-  }
-#endif
-  
-};
-
-void showMenu() {
+void showMenu(badgeStruct *thePrograms, uint8_t menuMax, uint16_t menuTimeout) {
   uint8_t menuIndex = 0;
-  uint8_t menuMax = sizeof(thePrograms) / sizeof(thePrograms[0]);
   bool menuChanged = false;
   
   setMessage(thePrograms[0].programName);
   while (true) {
-    LOOP(HOME_TIMEOUT);
+    LOOP(menuTimeout);
 
     
     if (NEW_BUTTON(BTN_DOWN)) {

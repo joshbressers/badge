@@ -26,7 +26,7 @@ void loop() {
   // held down button to triger the menu, which happens when you
   // select back from the menu (or anything else that could have an exit)
   if (CUR_BUTTON && (CUR_BUTTON ^ OLD_BUTTON)) {
-    showMenu();
+    showMenu(mainMenu, mainMenuLen, HOME_TIMEOUT);
     setMessage(defaultMessage);
   }
 }
