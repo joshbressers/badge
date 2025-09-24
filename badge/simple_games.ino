@@ -95,12 +95,12 @@ void spaceGame() {
   // We end up with the problme of >-1 to <1 is zero,
   // Which is too wide of a range. Think of zero on
   // ship as the middle, not the side
-  float ship_x = 4;
-  float bullet_x = 0;
-  float bullet_y = 0;
+  int16_t ship_x = 4*4096;
+  int16_t bullet_x = 0;
+  int16_t bullet_y = 0;
 
-  float alien_x = 0;
-  float alien_y = -1;
+  uint16_t alien_x = 0;
+  int16_t alien_y = -1;
 
   while(true) {
     LOOP(0);
@@ -112,46 +112,48 @@ void spaceGame() {
       // Very Ender's Game
 
       alien_y = 0;
-      alien_x = RANDOM(7);
+      alien_x = RANDOM(7) * 4096;
       
-    } else if (alien_y >= 7) {
+    } else if (alien_y/4096 >= 7) {
       printScore(score);
       return;
     }else {
-      setFrameBuffer((int)alien_x, (int)alien_y);
-      setFrameBuffer((int)alien_x + 1, (int)alien_y);
-      alien_y = alien_y + 0.005 + score * 0.001;
+      setFrameBuffer(alien_x/4096, alien_y/4096);
+      setFrameBuffer(alien_x/4096 + 1, alien_y/4096);
+      alien_y = alien_y + 1 + score * 2;
     }
 
     
-    if (PUSH_BUTTON(BTN_RIGHT) && ship_x < 7) {
-      ship_x = ship_x + 0.04;
+    if (PUSH_BUTTON(BTN_RIGHT) && ship_x/8192 < 7) {
+      ship_x = ship_x + 50;
     }
-    if (PUSH_BUTTON(BTN_LEFT) && ship_x > 0) {
-      ship_x = ship_x - 0.04;
+    if (PUSH_BUTTON(BTN_LEFT) && ship_x/8192 > 0) {
+      ship_x = ship_x - 50;
     }
     if (NEW_BUTTON(BTN_A) && bullet_y <= 0) {
       bullet_x = ship_x;
-      bullet_y = 6;
+      bullet_y = 6 * 4096;
     }
 
     if (bullet_y > 0) {
-      setFrameBuffer((int)bullet_x, (int)bullet_y);
+      setFrameBuffer(bullet_x/4096, bullet_y/4096);
 
-      if ((int(bullet_y) == (int)alien_y) && ((int)bullet_x >= (int)alien_x && (int)bullet_x <= ((int)alien_x + 1))) {
+      if (bullet_y < 0) {
+        bullet_y = -10;
+      } else if ((bullet_y/4096 == alien_y/4096) && ((bullet_x/4096 >= alien_x/4096) && (bullet_x/4096 <= (alien_x/4096 + 1)))) {
         alien_y = -10;
         alien_x = -10;
         bullet_y = -10;
         score++;
+      } else {
+        bullet_y = bullet_y - 40;
       }
-      
-      bullet_y = bullet_y - 0.05;
     }
 
     // Draw the ship
-    setFrameBuffer((int)ship_x - 1, 7);
-    setFrameBuffer((int)ship_x, 6);
-    setFrameBuffer((int)ship_x, 7);
-    setFrameBuffer((int)ship_x + 1, 7);
+    setFrameBuffer(ship_x/4096 - 1, 7);
+    setFrameBuffer(ship_x/4096, 6);
+    setFrameBuffer(ship_x/4096, 7);
+    setFrameBuffer(ship_x/4096 + 1, 7);
   }
 }
