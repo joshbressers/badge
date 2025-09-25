@@ -11,6 +11,7 @@
 //#define PongGame
 //#define SpaceGame
 //#define RainGame
+#define CustomMessage
 #define EnableTests
 
 // This is the default message that scrolls across the badge by default
@@ -49,7 +50,6 @@ const char* message;
 unsigned int messageLen = 0;
 
 const char scoreMessage[] PROGMEM = "Score ";
-unsigned char scoreString[10];
 
 
 // Constants used when writing the message to the framebuffer
@@ -117,6 +117,7 @@ void runTick();
 void pongGame();
 void spaceGame();
 void showRain();
+void customMessage();
 uint32_t random32();
 
 
@@ -131,6 +132,7 @@ const char menu3[] PROGMEM = "Test Screen ";
 const char menu4[] PROGMEM = "Pong ";
 const char menu5[] PROGMEM = "Space ";
 const char menu6[] PROGMEM = "Rain";
+const char menu7[] PROGMEM = "Custom Message ";
 
 typedef struct badgeStruct {
   const char *programName;
@@ -142,6 +144,12 @@ badgeStruct mainMenu[] = {
     menu0,
     NULL
   },
+#ifdef CustomMessage
+  {
+    menu7,
+    (*customMessage)
+  },
+#endif
 #ifdef RainGame
   {
     menu6,

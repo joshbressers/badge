@@ -9,6 +9,7 @@ bool progmemMessage = true;
 void printScore(unsigned int score) {
   uint8_t i = 0;
   unsigned int digit;
+  unsigned char scoreString[10];
 
   printMessage(scoreMessage, false);
 
