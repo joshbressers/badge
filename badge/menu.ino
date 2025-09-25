@@ -75,7 +75,7 @@ void setCustomMessage() {
     frameBuffer[7] = maxLen;
 
     if (PUSH_BUTTON(BTN_DOWN)) {
-      if (TICK(100)) {
+      if (TICK(60)) {
         if (currentChar == 94) {
           currentChar = 0;
         } else {
@@ -83,7 +83,7 @@ void setCustomMessage() {
         }
       }
     } else if (PUSH_BUTTON(BTN_UP)) {
-      if (TICK(100)) {
+      if (TICK(60)) {
         if (currentChar == 0) {
           currentChar = 94;
         } else {
