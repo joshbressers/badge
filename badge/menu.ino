@@ -61,7 +61,7 @@ void showCustomMessage() {
 
 void setCustomMessage() {
   unsigned char newString[100];
-  int8_t currentChar = 0;
+  int8_t currentChar = 0x21;
   uint8_t currentPos = 0;
   uint8_t maxLen = 0;
   while(1) {
@@ -117,7 +117,7 @@ void setCustomMessage() {
 uint8_t customMenuLen = sizeof(customMenu) / sizeof(customMenu[0]);
 
 void customMessage() {
-  showMenu(customMenu, customMenuLen, 0);
+  showMenu(customMenu, customMenuLen, 10000);
 }
 
 

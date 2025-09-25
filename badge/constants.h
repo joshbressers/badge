@@ -22,7 +22,7 @@ const char defaultMessage[] PROGMEM = "Default Badge Message ";
 
 // How many ticks should we wait until we return to home screen
 // Bigger numbers wait longer
-#define HOME_TIMEOUT 2000
+#define HOME_TIMEOUT 4000
 
 
 // Below here are things you probably shouldn't change
