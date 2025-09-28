@@ -127,7 +127,6 @@ void showMessage()
       } else{ 
         letterPos = message[0] - 0x20;
       }
-      donePrinting = true;
       // We subtrace 0x20 from the letter so our font index lines up
     } else {
       uint8_t pgmIndex = (messageCount) / 6;
@@ -154,6 +153,7 @@ void showMessage()
     messageCount++;
     if (messageCount >= messageLen * 6) {
       messageCount = 0;
+      donePrinting = true;
     }
   }
 
