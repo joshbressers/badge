@@ -44,7 +44,6 @@ const char codez[] PROGMEM = "sekrit codez!!! ";
 #define buttonPin PB4 // Button Input
 
 // Frame buffer variables
-byte currentRow = 0;
 byte frameBuffer[] = {0,0,0,0,0,0,0,0};
 
 // Message display constants
@@ -55,13 +54,13 @@ const char scoreMessage[] PROGMEM = "Score ";
 
 
 // Constants used when writing the message to the framebuffer
-unsigned long messageCount = 0;
-unsigned long lastButton = 0;
+unsigned int messageCount = 0;
+unsigned int lastButton = 0;
 
 // Tick constants
 // The millis() on this chip isn't very reliable, so let's just count up a tick
 // on every loop
-unsigned long currentTick = 0;
+unsigned int currentTick = 0;
 
 // State booleans
 bool donePrinting = false;

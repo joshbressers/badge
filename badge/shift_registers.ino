@@ -2,6 +2,7 @@
 
 #include "constants.h"
 
+
 // The RNG state
 uint32_t rngState = 0;
 
@@ -22,6 +23,7 @@ uint32_t random32()
   x ^= x << 5;
   return rngState = x;
 }
+
 
 void runTick() {
   
@@ -58,6 +60,7 @@ void shiftRegisters() {
 
       // Loop for each row
       for (int j = 0; j < 8; j++) {
+        uint8_t currentCol = 0x01;
         PORTB &= ~(1 << latchPin); // LOW
         // Loop for each col, writing/reading one bit per clock
         // Set the button to 0, we will fill in the bits as we go
@@ -66,7 +69,7 @@ void shiftRegisters() {
 
           // In this code we have to extract the relevant bits to shift into 
           // the register
-          if (!!(currentRow & (1 << (i)))) {
+          if (!!(currentRow & currentCol)) {
             PORTB |= (1 << dataPin1); // HIGH
           } else {
             PORTB &= ~(1 << dataPin1); // LOW
@@ -89,6 +92,7 @@ void shiftRegisters() {
           // Pulse the clock
           PORTB |= (1 << clockPin); // HIGH
           PORTB &= ~(1 << clockPin); // LOW
+          currentCol = currentCol << 1;
         }
         // Shift the row bit
         currentRow = currentRow << 1;
