@@ -11,11 +11,13 @@
 //#define PongGame
 //#define SpaceGame
 //#define RainGame
-#define CustomMessage
-#define EnableTests
+#define BlockGame
+//#define CustomMessage
+//#define EnableTests
 
 // This is the default message that scrolls across the badge by default
 const char defaultMessage[] PROGMEM = "Default Badge Message ";
+const char codez[] PROGMEM = "sekrit codez!!! ";
 
 // The speed at which the message scrolls. Bigger numbers scroll slower
 #define messageDelay 60
@@ -119,6 +121,8 @@ void spaceGame();
 void showRain();
 void customMessage();
 uint32_t random32();
+void teh_code();
+void badgeBlock();
 
 
 
@@ -131,8 +135,9 @@ const char menu2[] PROGMEM = "Dot ";
 const char menu3[] PROGMEM = "Test Screen ";
 const char menu4[] PROGMEM = "Pong ";
 const char menu5[] PROGMEM = "Space ";
-const char menu6[] PROGMEM = "Rain";
+const char menu6[] PROGMEM = "Rain ";
 const char menu7[] PROGMEM = "Custom Message ";
+const char menu8[] PROGMEM = "Badgetris ";
 
 typedef struct badgeStruct {
   const char *programName;
@@ -149,6 +154,12 @@ badgeStruct mainMenu[] = {
     menu7,
     (*customMessage)
   },
+#endif
+#ifdef BlockGame
+  {
+    menu8,
+    (*badgeBlock)
+  }
 #endif
 #ifdef RainGame
   {
