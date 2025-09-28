@@ -64,11 +64,12 @@ void setCustomMessage() {
   int8_t currentChar = 0x21;
   uint8_t currentPos = 0;
   uint8_t maxLen = 0;
+  clearFrameBuffer();
   while(1) {
     LOOP(0);
 
-    for (int i = 0; i < 6; i++) {
-      byte the_char = pgm_read_byte(font + (currentChar * 6) + i);
+    for (int i = 0; i < 5; i++) {
+      byte the_char = pgm_read_byte(font + (currentChar * 5) + i);
       frameBuffer[i] = the_char;
     }
     frameBuffer[6] = currentPos;

@@ -52,11 +52,13 @@ void printMessage(unsigned char *newMessage, bool memMessage) {
 
 // These are PROGMEM strings
 void setMessage(unsigned char *newMessage) {
+  clearFrameBuffer();
   progmemMessage = true;
   realSetMessage(newMessage);
 }
 
 void setMemMessage(unsigned char *newMessage) {
+  clearFrameBuffer();
   progmemMessage = false;
   realSetMessage(newMessage);
 }
@@ -101,44 +103,51 @@ void showMessage()
      * 
      */
     
-    for (int i = 0; i < 8; i++) {
-      /*
-       * There will always be 2 letters on the screen at a time. The letters
-       * are 6 pixels wide, the screen is 8
-       * 
-       * Don't think of the screen in terms of the letter we're showing
-       * thikn of it in terms of the column we are showing in the total message
-       */
-
-      // letterPos will track the current letter we are displaying
-      uint8_t letterPos;
-
-      // This block figures out where the curent letter we're to display is
-      // messageCount is the current row we are to display for the message
-      if (((messageCount + i) / 6) >= messageLen) {
-        // This the case where we hit the end of the message
-        // and have to wrap back to 0
-        if (progmemMessage) {
-          letterPos = pgm_read_word(message) - 0x20;
-        } else{ 
-          letterPos = message[0] - 0x20;
-        }
-        donePrinting = true;
-        // We subtrace 0x20 from the letter so our font index lines up
-      } else {
-        uint8_t pgmIndex = (messageCount + i) / 6;
-        if (progmemMessage) {
-          letterPos = pgm_read_word(message + pgmIndex) - 0x20;
-        } else {
-          letterPos = message[pgmIndex] - 0x20;
-        }
-      }
-
-      // pos contians the actual row we are going to display
-      uint8_t pos = (messageCount + i) % 6;
-      byte letterChar = pgm_read_byte(font + (letterPos * 6) + pos);
-      frameBuffer[i] = letterChar;
+    for (int i = 0; i < 7; i++) {
+      frameBuffer[i] = frameBuffer[i+1];
     }
+    /*
+     * There will always be 2 letters on the screen at a time. The letters
+     * are 6 pixels wide, the screen is 8
+     * 
+     * Don't think of the screen in terms of the letter we're showing
+     * thikn of it in terms of the column we are showing in the total message
+     */
+
+    // letterPos will track the current letter we are displaying
+    uint8_t letterPos;
+
+    // This block figures out where the curent letter we're to display is
+    // messageCount is the current row we are to display for the message
+    if (((messageCount) / 6) >= messageLen) {
+      // This the case where we hit the end of the message
+      // and have to wrap back to 0
+      if (progmemMessage) {
+        letterPos = pgm_read_word(message) - 0x20;
+      } else{ 
+        letterPos = message[0] - 0x20;
+      }
+      donePrinting = true;
+      // We subtrace 0x20 from the letter so our font index lines up
+    } else {
+      uint8_t pgmIndex = (messageCount) / 6;
+      if (progmemMessage) {
+        letterPos = pgm_read_word(message + pgmIndex) - 0x20;
+      } else {
+        letterPos = message[pgmIndex] - 0x20;
+      }
+    }
+
+    // pos contians the actual row we are going to display
+    uint8_t pos = (messageCount) % 6;
+    if (pos == 5) {
+      // Insert a gap between letters
+      frameBuffer[7] = 0x00;
+    } else {
+      byte letterChar = pgm_read_byte(font + (letterPos * 5) + pos);
+      frameBuffer[7] = letterChar;
+    }
+
 
     // messageCount is the row we're displaying, when we get to the end of the
     // string, we flip back to zero
