@@ -7,13 +7,13 @@
 // Things you might want to change are all located here
 
 // Games to enable
-//#define DotGame
-//#define PongGame
-//#define SpaceGame
-//#define RainGame
+#define DotGame
+#define PongGame
+#define SpaceGame
+#define RainGame
 #define BlockGame
-//#define CustomMessage
-//#define EnableTests
+#define CustomMessage
+#define EnableTests
 
 // This is the default message that scrolls across the badge by default
 const char defaultMessage[] PROGMEM = "Default Badge Message ";
@@ -159,7 +159,7 @@ badgeStruct mainMenu[] = {
   {
     menu8,
     (*badgeBlock)
-  }
+  },
 #endif
 #ifdef RainGame
   {
