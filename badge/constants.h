@@ -103,9 +103,8 @@ uint8_t OLD_BUTTON = 0x00;
 #define PUSH_BUTTON(the_btn) (CUR_BUTTON & the_btn)
 
 // Define our functions here
-void setMessage(unsigned char *newMessage);
-void setMemMessage(unsigned char *newMessage);
-void printMessage(unsigned char *newMessage, bool memMessage);
+void setMessage(unsigned char *newMessage, bool progMem);
+void printMessage(unsigned char *newMessage, bool progmemMessage);
 void printScore(unsigned int score);
 void shiftRegisters();
 void showMessage();

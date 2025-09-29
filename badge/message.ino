@@ -11,7 +11,7 @@ void printScore(unsigned int score) {
   unsigned int digit;
   unsigned char scoreString[10];
 
-  printMessage(scoreMessage, false);
+  printMessage(scoreMessage, true);
 
   scoreString[i++] = ' ';
 
@@ -33,16 +33,13 @@ void printScore(unsigned int score) {
   scoreString[i++] = ' ';
   scoreString[i] = 0x00; // NULL terminator
 
-  printMessage(scoreString, true);
+  printMessage(scoreString, false);
 }
 
 // Print a message then return
-void printMessage(unsigned char *newMessage, bool memMessage) {
-  if (memMessage) {
-    setMemMessage(newMessage);
-  } else {
-    setMessage(newMessage);
-  }
+void printMessage(unsigned char *newMessage, bool progmemMessage) {
+
+  setMessage(newMessage, progmemMessage);
   while (true) {
     LOOP(0);
     showMessage();
@@ -50,27 +47,17 @@ void printMessage(unsigned char *newMessage, bool memMessage) {
   }
 }
 
-// These are PROGMEM strings
-void setMessage(unsigned char *newMessage) {
-  clearFrameBuffer();
-  progmemMessage = true;
-  realSetMessage(newMessage);
-}
-
-void setMemMessage(unsigned char *newMessage) {
-  clearFrameBuffer();
-  progmemMessage = false;
-  realSetMessage(newMessage);
-}
-
 // Set the message to a string in PROGMEM
 // A string cannot be passed in here
-void realSetMessage(unsigned char *newMessage) {
+void setMessage(unsigned char *newMessage, bool progMem) {
+
+  progmemMessage = progMem;
   message = newMessage;
   messageCount = 0;
   donePrinting = false;
   byte messageByte;
 
+  clearFrameBuffer();
   // We have to write our own strlen as PROGMEM strings are different
   messageLen = 0;
   while (true) {
@@ -177,7 +164,7 @@ void setFrameBuffer(uint8_t x, uint8_t y) {
 
 void teh_code() {
 
-  setMessage(codez);
+  setMessage(codez, true);
   while (true) {
     LOOP(HOME_TIMEOUT);
     showMessage();

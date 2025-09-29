@@ -47,7 +47,7 @@ void showCustomMessage() {
     }
   }
 
-  setMemMessage(messageString);
+  setMessage(messageString, false);
 
   // Print the message until a keypress
   while(1) { 
@@ -127,7 +127,7 @@ void showMenu(badgeStruct *thePrograms, uint8_t menuMax, uint16_t menuTimeout) {
   uint8_t menuIndex = 0;
   bool menuChanged = false;
   
-  setMessage(thePrograms[0].programName);
+  setMessage(thePrograms[0].programName, true);
   while (true) {
     LOOP(menuTimeout);
 
@@ -154,7 +154,7 @@ void showMenu(badgeStruct *thePrograms, uint8_t menuMax, uint16_t menuTimeout) {
     }
     if (menuChanged) {
       menuChanged = false;
-      setMessage(thePrograms[menuIndex].programName);
+      setMessage(thePrograms[menuIndex].programName, true);
     }
 
     showMessage();

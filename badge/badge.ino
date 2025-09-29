@@ -28,7 +28,7 @@ DDRB |= (1 << dataPin1);
 DDRB |= (1 << dataPin2);
 DDRB &= ~(1 << buttonPin); // input
 
-setMessage(defaultMessage);
+setMessage(defaultMessage, true);
 }
 
 void loop() {
@@ -45,12 +45,12 @@ void loop() {
       if (code_count == sizeof(secretCode)) {
         code_count = 0;
         teh_code();
-        setMessage(defaultMessage);
+        setMessage(defaultMessage, true);
       }
     } else {
       code_count = 0;
       showMenu(mainMenu, mainMenuLen, HOME_TIMEOUT);
-      setMessage(defaultMessage);
+      setMessage(defaultMessage, true);
     }
   }
 }
