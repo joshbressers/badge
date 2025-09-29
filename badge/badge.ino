@@ -44,7 +44,7 @@ void loop() {
       code_count++;
       if (code_count == sizeof(secretCode)) {
         code_count = 0;
-        teh_code();
+        printMessage(codez, true);
         setMessage(defaultMessage, true);
       }
     } else {

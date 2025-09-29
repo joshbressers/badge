@@ -89,7 +89,7 @@ void showMessage()
      * This was done becuase it makes scrolling letters much much easier
      * 
      */
-    
+
     for (int i = 0; i < 7; i++) {
       frameBuffer[i] = frameBuffer[i+1];
     }
@@ -149,24 +149,12 @@ void showMessage()
 // Write all zeros to the framebuffer
 // Basically, clear the screen
 void clearFrameBuffer() {
-  for (int i = 0; i < 8; i++) {
-    frameBuffer[i] = 0;
-  }
-  // Reset the message to the beginning
+  memset(frameBuffer, 0, 8);
   messageCount = 0;
 }
 
 // Set one point on the framebuffer
 void setFrameBuffer(uint8_t x, uint8_t y) {
-  if (x < 8 && y < 8 && x >= 0 && y >= 0)
+  if (x < 8 && y < 8)
     frameBuffer[x] |= 1 << y;
-}
-
-void teh_code() {
-
-  setMessage(codez, true);
-  while (true) {
-    LOOP(HOME_TIMEOUT);
-    showMessage();
-  }
 }

@@ -17,7 +17,7 @@
 
 // This is the default message that scrolls across the badge by default
 const char defaultMessage[] PROGMEM = "Default Badge Message ";
-const char codez[] PROGMEM = "sekrit codez!!! ";
+const char codez[] PROGMEM = "sekrit codez!!!  ";
 
 // The speed at which the message scrolls. Bigger numbers scroll slower
 #define messageDelay 60
