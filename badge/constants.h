@@ -7,24 +7,24 @@
 // Things you might want to change are all located here
 
 // Games to enable
-//#define DotGame
-//#define PongGame
-//#define SpaceGame
-//#define RainGame
-//#define BlockGame
-//#define CustomMessage
-//#define EnableTests
+#define DotGame
+#define PongGame
+#define SpaceGame
+#define RainGame
+#define BlockGame
+#define CustomMessage
+#define EnableTests
 
 // This is the default message that scrolls across the badge by default
 const char defaultMessage[] PROGMEM = "Default Badge Message ";
 const char codez[] PROGMEM = "sekrit codez!!!  ";
 
 // The speed at which the message scrolls. Bigger numbers scroll slower
-#define messageDelay 60
+#define messageDelay 30
 
 // How many ticks should we wait until we return to home screen
 // Bigger numbers wait longer
-#define HOME_TIMEOUT 4000
+#define HOME_TIMEOUT 3000
 
 
 // Below here are things you probably shouldn't change

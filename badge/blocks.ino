@@ -32,7 +32,7 @@ void badgeBlock() {
     clearFrameBuffer(); // We don't technically need this
 
     // Only move the piece every now and then, or if the down button is pressed
-    if (TICK(200) || down) {
+    if (TICK(150) || down) {
       down = false;
       // Check if the piece is hitting anything
       for (int i = 0; i < 4; i++) {

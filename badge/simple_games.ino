@@ -42,8 +42,8 @@ void pongGame() {
 
   float paddle_x = 0;
 
-  if (RANDOM(2)) ball_x_vel = -0.012;
-  if (RANDOM(2)) ball_y_vel = -0.01;
+  if (RANDOM(2)) ball_x_vel = -0.022;
+  if (RANDOM(2)) ball_y_vel = -0.02;
 
   while(true) {
     LOOP(0);
@@ -124,11 +124,11 @@ void spaceGame() {
     }
 
     
-    if (PUSH_BUTTON(BTN_RIGHT) && ship_x/8192 < 7) {
-      ship_x = ship_x + 50;
+    if (PUSH_BUTTON(BTN_RIGHT) && ship_x < 32668) {
+      ship_x = ship_x + 150;
     }
-    if (PUSH_BUTTON(BTN_LEFT) && ship_x/8192 > 0) {
-      ship_x = ship_x - 50;
+    if (PUSH_BUTTON(BTN_LEFT) && ship_x > -1) {
+      ship_x = ship_x - 150;
     }
     if (NEW_BUTTON(BTN_A) && bullet_y <= 0) {
       bullet_x = ship_x;
@@ -146,7 +146,7 @@ void spaceGame() {
         bullet_y = -10;
         score++;
       } else {
-        bullet_y = bullet_y - 40;
+        bullet_y = bullet_y - 100;
       }
     }
 

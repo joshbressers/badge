@@ -3,7 +3,7 @@
 
 void buttonTest() {
   while(true) {
-    LOOP(HOME_TIMEOUT);
+    LOOP(1000);
 
     // Clear the frame buffer
     clearFrameBuffer();

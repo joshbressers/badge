@@ -5,7 +5,7 @@ void showRain() {
   uint8_t x = 4;
   uint8_t y = 3;
   uint8_t loopCount = 0;
-  uint8_t rainSpeed = 100;
+  uint8_t rainSpeed = 50;
 
   while(true) {
 
