@@ -66,6 +66,8 @@ def error(err):
 # Main
 while True:
 
+    end_state = None
+
     # False is pressed
     if switch.value != False:
         time.sleep(0.5)
@@ -102,6 +104,7 @@ while True:
         grnLight.value = False
         yelLight.value = False
         redLight.value = True
+        end_state = False
 
     else:
         print("Done!")
@@ -109,10 +112,15 @@ while True:
         grnLight.value = True
         yelLight.value = False
         redLight.value = False
+        end_state = True
     
     # wait for the switch to be opened
     while switch.value == False:
-        time.sleep(0.2)
+        time.sleep(0.5)
+        if end_state == True:
+            grnLight.value = not grnLight.value
+        else:
+            redLight.value = not redLight.value
         
     time.sleep(2) # This is our debouncer
     grnLight.value = True
