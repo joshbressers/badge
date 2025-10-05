@@ -12,10 +12,13 @@ ATtiny13a programming example, be sure you have the '13a wired up so:
 Drag "attiny13a_blink.hex" onto the CircuitPython disk drive, then open REPL!
 """
 
+import sys
+import time
 import board
 import busio
 import microcontroller
 import microcontroller.pin
+import digitalio
 
 import adafruit_avrprog
 
@@ -23,44 +26,95 @@ import adafruit_avrprog
 #mosi = microcontroller.pin.GPIO19
 #miso = microcontroller.pin.GPIO16
 
-sck = microcontroller.pin.GPIO10
-mosi = microcontroller.pin.GPIO11
-miso = microcontroller.pin.GPIO12
+sck = microcontroller.pin.GPIO18
+mosi = microcontroller.pin.GPIO19
+miso = microcontroller.pin.GPIO16
+reset = microcontroller.pin.GPIO10
 
-#spi = busio.SPI(board.SCK, board.MOSI, board.MISO)
 spi = busio.SPI(sck, mosi, miso)
 avrprog = adafruit_avrprog.AVRprog()
-avrprog.init(spi, microcontroller.pin.GPIO15)
-
+avrprog.init(spi, reset)
 # Each chip has to have a definition so the script knows how to find it
 attiny85 = avrprog.Boards.ATtiny85
 
+switch = digitalio.DigitalInOut(board.GP0)
+switch.switch_to_input(pull=digitalio.Pull.UP)
+
+redLight = digitalio.DigitalInOut(board.GP8)
+redLight.direction = digitalio.Direction.OUTPUT
+yelLight = digitalio.DigitalInOut(board.GP7)
+yelLight.direction = digitalio.Direction.OUTPUT
+grnLight = digitalio.DigitalInOut(board.GP9)
+grnLight.direction = digitalio.Direction.OUTPUT
+
+grnLight.value = True
+yelLight.value = False
+redLight.value = False
 
 def error(err):
     """Helper to print out errors for us and then halt"""
     print("ERROR: " + err)
     avrprog.end()
-    while True:
-        pass
+
+    grnLight.value = False
+    yelLight.value = False
+    redLight.value = True
+    
+    raise Exception(err)
 
 
-#while input("Ready to GO, type 'G' here to start> ") != "G":
-#    pass
+# Main
+while True:
 
-if not avrprog.verify_sig(attiny85, verbose=True):
-    error("Signature read failure")
-print("Found", attiny85["name"])
+    # False is pressed
+    if switch.value != False:
+        time.sleep(0.5)
+        continue
 
-fuses = avrprog.read_fuses(attiny85)
+    time.sleep(1) # Debounce
 
-#print("Fuses")
-#print(fuses)
+    grnLight.value = False
+    yelLight.value = True
+    redLight.value = False
+    try:
+        
+        if not avrprog.verify_sig(attiny85, verbose=True):
+            error("Signature read failure")
 
-avrprog.write_fuses(attiny85, low=0x62, high=0xD7, ext=0x07, lock=0x3F)
-#if not avrprog.verify_fuses(attiny13, low=0x7A, high=0xFF):
-#    error("Failure verifying fuses!")
+        print("Found", attiny85["name"])
 
-print("Programming flash from file")
-avrprog.program_file(attiny85, "badge.ino.hex", verbose=True, verify=True)
+        fuses = avrprog.read_fuses(attiny85)
 
-print("Done!")
+        print("Fuses")
+        print(fuses)
+
+        avrprog.write_fuses(attiny85, low=0x62, high=0xD7, ext=0x07, lock=0x3F)
+
+        print("Programming flash from file")
+
+        if not avrprog.program_file(attiny85, "badge.ino.hex", verbose=True, verify=True):
+            error("Failure programming flash")
+        avrprog.end()
+    except Exception as e:
+        print("Failure programming flash")
+        print(e)
+        avrprog.end()
+        grnLight.value = False
+        yelLight.value = False
+        redLight.value = True
+
+    else:
+        print("Done!")
+
+        grnLight.value = True
+        yelLight.value = False
+        redLight.value = False
+    
+    # wait for the switch to be opened
+    while switch.value == False:
+        time.sleep(0.2)
+        
+    time.sleep(2) # This is our debouncer
+    grnLight.value = True
+    yelLight.value = False
+    redLight.value = False
