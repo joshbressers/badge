@@ -39,6 +39,7 @@ void loop() {
   // The bitwise XOR is here because we don't want a
   // held down button to triger the menu, which happens when you
   // select back from the menu (or anything else that could have an exit)
+#ifdef SecretCode
   if (CUR_BUTTON && (CUR_BUTTON ^ OLD_BUTTON)) {
     if (secretCode[code_count] == CUR_BUTTON) {
       code_count++;
@@ -53,4 +54,11 @@ void loop() {
       setMessage(defaultMessage, true);
     }
   }
+#endif
+#ifndef SecretCode
+  if (CUR_BUTTON && (CUR_BUTTON ^ OLD_BUTTON)) {
+      showMenu(mainMenu, mainMenuLen, HOME_TIMEOUT);
+      setMessage(defaultMessage, true);
+  }
+#endif
 }
