@@ -61,6 +61,14 @@ void showCustomMessage() {
 
 void setCustomMessage() {
   unsigned char newString[100];
+  getString(newString);
+  for (int i = 0; i < 100; i++) {
+    EEPROM.write(i, newString[i]);
+    if (newString[i] == 0) break;
+  }
+}
+
+void getString(unsigned char *theString) {
   int8_t currentChar = 0x21;
   uint8_t currentPos = 0;
   uint8_t maxLen = 0;
@@ -93,25 +101,20 @@ void setCustomMessage() {
       }
     } else if (NEW_BUTTON(BTN_LEFT)) {
       if (currentPos != 0) currentPos--;
-      currentChar = newString[currentPos]-0x20;
+      currentChar = theString[currentPos]-0x20;
     } else if (NEW_BUTTON(BTN_RIGHT)) {
       if (currentPos < 100) currentPos++;
       if (currentPos > maxLen) {
         maxLen = currentPos;
         currentChar = 0;
       } else {
-        currentChar = newString[currentPos]-0x20;
+        currentChar = theString[currentPos]-0x20;
       }
     } else if (NEW_BUTTON(BTN_B)) {
-      newString[maxLen+1] = 0;
+      theString[maxLen+1] = 0;
       break;
     }
-    newString[currentPos] = currentChar + 0x20;
-  }
-  
-  for (int i = 0; i < 100; i++) {
-    EEPROM.write(i, newString[i]);
-    if (newString[i] == 0) break;
+    theString[currentPos] = currentChar + 0x20;
   }
 }
 

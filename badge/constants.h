@@ -124,6 +124,7 @@ void customMessage();
 uint32_t random32();
 void teh_code();
 void badgeBlock();
+void getString(unsigned char *theString);
 
 
 
