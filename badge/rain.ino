@@ -9,6 +9,8 @@ void showRain() {
 
   while(true) {
 
+    if (rainSpeed == 0) rainSpeed = 1;
+
     clearFrameBuffer();
 
     if (loopCount == 0)
