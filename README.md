@@ -12,6 +12,13 @@ The goal of the Open Badge Project was to build a badge that costs $5 or less an
 
 The badge as it stands right now will only cost $5 if you build A LOT (1000 or more). The cost is closer to $6 or $7 for smaller batches at the moment, but that's still pretty reasonable.
 
+### Types
+There are two versions of the badge. One is a through hole badge that's very easy to solder. It was designed with human fabricators in mind. The kicad files in the main branch are for the through hole model.
+
+There is also a surface mount version in the [surface-mount](https://github.com/joshbressers/badge/tree/surface-mount) branch. This version of the badge can be sent off to a fabricator to be mass produced.
+
+Both badge versions use the same code.
+
 ## How does it work?
 The badge itself runs on a microprocessor called an ATTINY85. It has 8K of program space, 512 bytes (yes, bytes) of memory. That microprocessor then drives 3 shift registers. One for the button input, and two for the display output. Shift registers shouldn't be used to drive LEDs, but it works, and doing it this way keeps the cost down.
 
