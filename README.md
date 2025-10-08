@@ -1,3 +1,8 @@
+This code is no longer maintained, everything got too complicated. You should go to the new home of this project
+https://github.com/OpenBadgeProject
+
+
+
 # Open Badge Project
 
 ![](<images/badge.gif>)
